@@ -3,7 +3,7 @@
 
 This solution was developed to solve Buzzvel's 2023 Dev Team Test, consisting of a task management application (to-do list).
 
-John Task List is a task management application for John, a busy professional struggling to stay organized, it's purposefuly user-friendly, visually appealing and allows him to create, track and remove tasks.
+John Task List is a task management application designed for John, a busy professional who struggles to stay organized. It is purposefully user-friendly and visually appealing, allowing him to create, track, and remove tasks.
 
 ## Installation
 [comment]: <> (Provide detailed step-by-step instructions on how to install and set up the application. Since you're distributing it using Docker, outline the necessary Docker commands and dependencies)
@@ -33,4 +33,4 @@ John Task List is a task management application for John, a busy professional st
 
 ## Contact Information
 [comments]: <> (Include your contact information or a link to your portfolio or personal website so that potential employers or collaborators can reach out to you.)
-[Marcus Davanco] (https://marcusdavanco.github.io)
+[Marcus Davanco](https://marcusdavanco.github.io)
