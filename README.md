@@ -33,3 +33,4 @@ John Task List is a task management application for John, a busy professional st
 
 ## Contact Information
 [comments]: <> (Include your contact information or a link to your portfolio or personal website so that potential employers or collaborators can reach out to you.)
+[Marcus Davanco] (https://marcusdavanco.github.io)
