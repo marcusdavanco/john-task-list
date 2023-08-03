@@ -33,7 +33,7 @@ John Task List is a task management application designed for John, a busy profes
 
 ## Contact Information
 [comments]: <> (Include your contact information or a link to your portfolio or personal website so that potential employers or collaborators can reach out to you.)
-[LinkedIn](https://www.linkedin.com/in/marcusdavanco/)
-[Email](mailto:marcusdavanco@gmail.com)
-[Blog](https://marcusdavanco.github.io)
+- [LinkedIn](https://www.linkedin.com/in/marcusdavanco/)
+- [Email](mailto:marcusdavanco@gmail.com)
+- [Blog](https://marcusdavanco.github.io)
 
