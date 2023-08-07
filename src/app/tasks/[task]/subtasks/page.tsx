@@ -1,6 +1,5 @@
 import { Button } from "@/components/button";
 import { Task } from "@/components/task";
-
 import { ArrowUpDown } from "lucide-react";
 
 export default function Tasks() {
@@ -8,12 +7,10 @@ export default function Tasks() {
     <main className="flex min-h-screen flex-col items-center px-[18px] py-7">
       <article className="flex flex-col items-center w-full gap-7 mb-7">
         <header className="flex justify-between items-center w-full">
-          <h2 className="text-secondary-300 font-bold uppercase text-xs">todo</h2>
+          <h2 className="text-secondary-300 font-bold uppercase text-xs">Foo - Due today</h2>
           <ArrowUpDown size={16} className="text-secondary-300" />
         </header>
         <section className='flex flex-col gap-4 w-full'>
-          <Task />
-          <Task />
           <Task />
           <Task />
         </section>
@@ -23,8 +20,6 @@ export default function Tasks() {
           <h2 className="text-secondary-300 font-bold uppercase text-xs">completed</h2>
         </header>
         <section className='flex flex-col gap-4 w-full'>
-          <Task completed />
-          <Task completed />
           <Task completed />
         </section>
       </article>
