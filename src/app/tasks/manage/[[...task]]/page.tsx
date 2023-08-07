@@ -10,7 +10,7 @@ export default function Tasks() {
           <h2 className="text-secondary-300 font-bold uppercase text-xs">New Task</h2>
         </header>
         <section className='flex flex-col gap-4 w-full'>
-          <Card >
+          <Card customHeight>
             <div className="flex flex-col gap-4 flex-1 ">
               <label className="flex flex-col gap-1">
                 <span>Due</span>

@@ -3,9 +3,10 @@ import { ReactNode } from "react"
 interface CardProps {
   children: ReactNode
   opaque?: boolean
+  customHeight?: boolean
 }
 
-export function Card({ children, opaque = true }: CardProps) {
+export function Card({ children, opaque = true, customHeight = false }: CardProps) {
 
   return (
     <article
@@ -21,7 +22,7 @@ export function Card({ children, opaque = true }: CardProps) {
         }}
       />
       <div
-        className={`flex items-center w-full h-fit rounded-lg bg-gradient-to-bl ${!opaque ? "from-white/[0.05] to-white[0.02]" : "from-white/[0.18] to-white/[0.08]"} shadow-sm p-6`}
+        className={`flex items-center w-full ${customHeight ? "h-fit" : "h-[90px]"} rounded-lg bg-gradient-to-bl ${!opaque ? "from-white/[0.05] to-white[0.02]" : "from-white/[0.18] to-white/[0.08]"} shadow-sm p-6`}
       >
         {children}
       </div>
