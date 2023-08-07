@@ -1,4 +1,8 @@
-export function Task() {
+interface TaskProps {
+  completed: boolean
+}
+
+export function Task({ completed }: TaskProps) {
 
   return (
     <article
@@ -9,7 +13,8 @@ export function Task() {
         style={{
           background: "linear-gradient(179deg, rgba(255, 255, 255, 0.25) 0%, transparent 100%)",
           padding: "0.1rem",
-          clipPath: "polygon(0 0, 0 100%, 0.125rem 100%, 0.125rem 0.125rem, calc(100% - 0.125rem) 0.125rem, calc(100% - 0.125rem) calc(100% - 0.125rem), 0.125rem calc(100% - 0.125rem), 0.125rem 100%, 100% 100%, 100% 0)"
+          clipPath: "polygon(0 0, 0 100%, 0.125rem 100%, 0.125rem 0.125rem, calc(100% - 0.125rem) 0.125rem, calc(100% - 0.125rem) calc(100% - 0.125rem), 0.125rem calc(100% - 0.125rem), 0.125rem 100%, 100% 100%, 100% 0)",
+          filter: "blur(2px)"
         }}
       >
         <div
@@ -17,7 +22,7 @@ export function Task() {
         />
       </div>
       <div
-        className="flex items-center w-full h-[90px] rounded-lg bg-gradient-to-bl from-white/[0.18] to-white/[0.08] shadow-sm p-6"
+        className={`flex items-center w-full h-[90px] rounded-lg bg-gradient-to-bl ${completed ? "from-white/[0.05] to-white[0.02]" : "from-white/[0.18] to-white/[0.08]"} shadow-sm p-6`}
       >
         <div>
           Todo
