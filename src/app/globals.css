@@ -17,11 +17,31 @@
 }
 
 body {
-  color: rgb(var(--foreground-rgb));
+  color: rgb(var(--foreground-rgb));  
   background: linear-gradient(
       to bottom,
       transparent,
       rgb(var(--background-end-rgb))
     )
     rgb(var(--background-start-rgb));
+  
 }
+
+:focus {
+  outline: #3D79B1;
+  box-shadow: 0 0 0 2px #3D79B1;
+}
+
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+  opacity: 0
+}
+
+input[type="date"]::after {
+    content: "\1F4C5"; /* Unicode for the calendar icon (adjust as needed) */
+    z-index: -1;
+    position: absolute;
+    right: 1.65rem;    
+    @apply px-2 py-1;
+    cursor: pointer;   
+  }

@@ -13,16 +13,16 @@ export default function Tasks() {
           <Card customHeight>
             <div className="flex flex-col gap-4 flex-1 ">
               <label className="flex flex-col gap-1">
-                <span>Due</span>
+                <span className="text-xs uppercase font-bold mb-1">Due</span>
                 <input type="date" className="border-white border-[1px] bg-transparent rounded-md h-10 p-3" />
               </label>
 
               <label className="flex flex-col gap-1">
-                <span>Description</span>
+                <span className="text-xs uppercase font-bold mb-1">Description</span>
                 <textarea rows={3} maxLength={120} className="border-white border-[1px] bg-transparent rounded-md h-24 p-3" />
               </label>
 
-              <button className="px-4 py-2 bg-secondary-300 rounded-md">
+              <button className="px-4 py-2 bg-secondary-300 rounded-md font-bold uppercase">
                 Add
               </button>
             </div>

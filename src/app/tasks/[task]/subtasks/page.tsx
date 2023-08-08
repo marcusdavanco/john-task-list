@@ -17,7 +17,7 @@ export default function Tasks() {
       </article>
       <article className="flex flex-col items-center w-full gap-7">
         <header className="flex justify-between items-center w-full">
-          <h2 className="text-secondary-300 font-bold uppercase text-xs">completed</h2>
+          <h2 className="text-secondary-300 font-bold uppercase text-xs">done</h2>
         </header>
         <section className='flex flex-col gap-4 w-full'>
           <Task completed />
