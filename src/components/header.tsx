@@ -10,7 +10,7 @@ export function Header() {
 
   return (
     <header className='flex justify-between border-b-2 border-primary-100 px-3 py-[18px]'>
-      {currentPath[currentPath.length - 1] === 'tasks' ? <Menu size={24} className="text-primary-100" /> : <button onClick={() => router.back()}><ChevronLeft size={24} className="text-primary-100" /></button>}
+      {currentPath[currentPath.length - 1] === 'tasks' ? <Menu size={24} className="text-primary-100 cursor-not-allowed" /> : <button onClick={() => router.back()}><ChevronLeft size={24} className="text-primary-100 cursor-pointer" /></button>}
       <h1 className="text-secondary-300 uppercase font-bold">{currentPath[currentPath.length - 1]}</h1>
     </header>
   )

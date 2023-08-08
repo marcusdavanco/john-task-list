@@ -7,10 +7,10 @@ export function ManageTaskForm() {
 
   return (
     <form className="flex flex-col items-center w-full gap-7 mb-7">
-      <header className="flex justify-between items-center w-full">
+      <header className="flex justify-between items-center w-full max-w-[46rem]">
         <h2 className="text-secondary-300 font-bold uppercase text-xs">{`${path.endsWith('manage') ? 'New' : 'Edit'} ${path.includes('subtask') ? 'Subtask' : 'Task'}`}</h2>
       </header>
-      <section className='flex flex-col gap-4 w-full'>
+      <section className='flex flex-col gap-4 w-full items-center'>
         <Card customHeight>
           <div className="flex flex-col gap-4 flex-1 ">
             <label className="flex flex-col gap-1">

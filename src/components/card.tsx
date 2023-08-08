@@ -13,10 +13,10 @@ export function Card({ children, opaque = true, customHeight = false, onClick }:
   return (
     <article
       onClick={onClick}
-      className="w-full rounded-lg relative"
+      className="w-full rounded-lg relative max-w-[46rem]"
     >
       <div
-        className="rounded-lg absolute left-0 right-0 top-0 bottom-0 opacity-65 flex w-full h-[90px]"
+        className="rounded-lg absolute left-0 right-0 top-0 bottom-0 opacity-65 flex w-full  h-[90px]"
         style={{
           background: "linear-gradient(179deg, rgba(255, 255, 255, 0.25) 0%, transparent 100%)",
           padding: "0.1rem",
