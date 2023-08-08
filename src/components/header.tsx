@@ -9,9 +9,13 @@ export function Header() {
   const router = useRouter()
 
   return (
-    <header className='flex justify-between border-b-2 border-primary-100 px-3 py-[18px]'>
-      {currentPath[currentPath.length - 1] === 'tasks' ? <Menu size={24} className="text-primary-100 cursor-not-allowed" /> : <button onClick={() => router.back()}><ChevronLeft size={24} className="text-primary-100 cursor-pointer" /></button>}
-      <h1 className="text-secondary-300 uppercase font-bold">{currentPath[currentPath.length - 1]}</h1>
+    <header className='flex justify-between border-b-2 border-primary-100 px-3 py-[18px] lg:justify-center lg:bg-black lg:border-none lg:py-20'>
+      {currentPath[currentPath.length - 1] === 'tasks'
+        ? <Menu size={24} className="text-primary-100 cursor-not-allowed lg:hidden" />
+        : (
+          <button onClick={() => router.back()}><ChevronLeft size={24} className="text-primary-100 cursor-pointer lg:mr-auto block lg:hidden" /></button>
+        )}
+      <h1 className="text-secondary-300 uppercase font-bold lg:text-4xl lg:mx-auto">{currentPath[currentPath.length - 1]}</h1>
     </header>
   )
 }
