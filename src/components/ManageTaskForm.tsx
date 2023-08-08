@@ -8,7 +8,7 @@ export function ManageTaskForm() {
   return (
     <form className="flex flex-col items-center w-full gap-7 mb-7">
       <header className="flex justify-between items-center w-full">
-        <h2 className="text-secondary-300 font-bold uppercase text-xs">{path.endsWith('manage') ? 'New Task' : "Edit Task"}</h2>
+        <h2 className="text-secondary-300 font-bold uppercase text-xs">{`${path.endsWith('manage') ? 'New' : 'Edit'} ${path.includes('subtask') ? 'Subtask' : 'Task'}`}</h2>
       </header>
       <section className='flex flex-col gap-4 w-full'>
         <Card customHeight>
