@@ -1,15 +1,18 @@
 import { ReactNode } from "react"
 
+// TODO - Extend this interface to receive the onClick prop as an HTML Article Element
 interface CardProps {
   children: ReactNode
   opaque?: boolean
   customHeight?: boolean
+  onClick?: () => void
 }
 
-export function Card({ children, opaque = true, customHeight = false }: CardProps) {
+export function Card({ children, opaque = true, customHeight = false, onClick }: CardProps) {
 
   return (
     <article
+      onClick={onClick}
       className="w-full rounded-lg relative"
     >
       <div
