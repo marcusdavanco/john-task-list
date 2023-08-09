@@ -32,6 +32,8 @@ John Task List is a task management application designed for John, a busy profes
 [comments]: <> (If your project uses third-party libraries, frameworks, or resources, give credit to the respective authors and provide links to their repositories or websites.)
 The Application layout was inspired by [Todo List Mobile App](https://dribbble.com/shots/4411419/attachments/4411419-Todo-List-Mobile-App?mode=media) from Jenelle Miller.
 
+Special thanks to [Guilherme Vieira](https://github.com/guiprav) for the help with the glassmorphic cards styling and structure.
+
 ## Contact Information
 [comments]: <> (Include your contact information or a link to your portfolio or personal website so that potential employers or collaborators can reach out to you.)
 - [LinkedIn](https://www.linkedin.com/in/marcusdavanco/)
