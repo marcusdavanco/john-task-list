@@ -7,7 +7,7 @@ export default function Tasks() {
   return (
     <main className="flex flex-1 h flex-col items-center px-[18px] py-7 relative">
       <div className="block w-full lg:flex gap-8 justify-center">
-        <article className="flex flex-col items-center w-full max-w-[46rem] gap-7 mb-7">
+        <article className="flex flex-col items-center w-full lg:max-w-[46rem] gap-7 mb-7">
           <header className="flex justify-between items-center w-full max-w-[46rem]">
             <h2 className="text-secondary-300 font-bold uppercase text-xs">
               todo
@@ -24,7 +24,7 @@ export default function Tasks() {
             <Task />
           </section>
         </article>
-        <article className="flex flex-col items-center w-full max-w-[46rem] gap-7">
+        <article className="flex flex-col items-center w-full lg:max-w-[46rem] gap-7">
           <header className="flex justify-between items-center w-full max-w-[46rem]">
             <h2 className="text-secondary-300 font-bold uppercase text-xs">
               done
