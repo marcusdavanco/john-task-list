@@ -1,4 +1,4 @@
-import { TaskRepository } from "@/repositories/task-repository";
+import { TaskRepository } from "@/repositories/tasks/task-repository";
 import { Task } from "@prisma/client";
 
 interface ListUseCaseResponse {

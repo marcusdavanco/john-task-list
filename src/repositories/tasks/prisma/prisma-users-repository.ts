@@ -1,11 +1,9 @@
-import { prisma } from "../../lib/prisma"
+import { prisma } from "@/lib/prisma"
 import { Prisma } from "@prisma/client"
 import { TaskRepository } from "../task-repository"
 
 export class PrismaTasksRepository implements TaskRepository {
-  update(data: Prisma.TaskCreateInput): Promise<{ id: string; title: string; completed: boolean; due_date: Date | null; created_at: Date }> {
-    throw new Error("Method not implemented.")
-  }
+  
   toggleCompleted(id: string): Promise<{ id: string; title: string; completed: boolean; due_date: Date | null; created_at: Date }> {
     throw new Error("Method not implemented.")
   }
@@ -21,5 +19,16 @@ export class PrismaTasksRepository implements TaskRepository {
     const tasks = await prisma.task.findMany()
 
     return tasks
+  }
+
+  async update(id: string, data: Prisma.TaskCreateInput) {
+    const task = await prisma.task.update({
+      where: {
+        id
+      },
+      data
+    })
+
+    return task
   }
 }
