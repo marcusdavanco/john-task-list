@@ -1,4 +1,4 @@
-import { InMemoryTasksRepository } from '@/repositories/in-memory/in-memory-repository'
+import { InMemoryTasksRepository } from '@/repositories/tasks/in-memory/in-memory-repository'
 import { RegisterUseCase } from './register'
 import { ListUseCase } from './list'
 
