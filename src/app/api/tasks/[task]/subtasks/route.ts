@@ -3,8 +3,10 @@ import { ListUseCase } from '@/use-cases/subtasks/list'
 import { RegisterUseCase } from '@/use-cases/subtasks/register'
 import { PrismaSubtasksRepository } from '@/repositories/subtasks/prisma/prisma-subtasks-repository'
  
+export const subtasksRepository = new PrismaSubtasksRepository()
+
 export async function GET(req: NextRequest) {
-  const subtasksRepository = new PrismaSubtasksRepository()
+  
   const listUseCase = new ListUseCase(subtasksRepository)
 
   const { task_id } = await req.json()
@@ -17,7 +19,6 @@ export async function GET(req: NextRequest) {
 }
 
 export async function POST(req: NextRequest) {
-  const subtasksRepository = new PrismaSubtasksRepository()
   const registerUseCase = new RegisterUseCase(subtasksRepository)
 
   const { title, due_date, task_id } = await req.json()

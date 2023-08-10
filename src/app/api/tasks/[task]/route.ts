@@ -2,13 +2,15 @@ import { NextRequest, NextResponse } from 'next/server'
 import { UpdateUseCase } from '@/use-cases/tasks/update'
 import { ToggleCompletedUseCase } from '@/use-cases/tasks/toggleCompleted'
 import { DeleteUseCase } from '@/use-cases/tasks/delete'
-import { PrismaTasksRepository } from '@/repositories/tasks/prisma/prisma-tasks-repository'
+import { tasksRepository } from '../route'
 
-export async function PUT(req: NextRequest) {
-  const tasksRepository = new PrismaTasksRepository()
+export async function PUT(req: NextRequest) {  
   const updateUseCase = new UpdateUseCase(tasksRepository)
 
-  const { id, title, due_date } = await req.json()
+  const { title, due_date } = await req.json()
+
+  const id = req.nextUrl.pathname.split('/').pop()!  
+
 
   const updatedTask = await updateUseCase.execute({ id, title, due_date })
 
@@ -16,10 +18,9 @@ export async function PUT(req: NextRequest) {
 }
 
 export async function PATCH(req: NextRequest) {
-  const tasksRepository = new PrismaTasksRepository()
   const toggleCompletedUseCase = new ToggleCompletedUseCase(tasksRepository)
 
-  const { id } = await req.json()
+  const id = req.nextUrl.pathname.split('/').pop()!  
 
   const updatedTask = await toggleCompletedUseCase.execute({ id })
 
@@ -27,10 +28,9 @@ export async function PATCH(req: NextRequest) {
 }
 
 export async function DELETE(req: NextRequest) {
-  const tasksRepository = new PrismaTasksRepository()
   const deleteUseCase = new DeleteUseCase(tasksRepository)
 
-  const { id } = await req.json()
+  const id = req.nextUrl.pathname.split('/').pop()!  
 
   await deleteUseCase.execute({ id })
 
