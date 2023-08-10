@@ -6,8 +6,10 @@ import { subtasksRepository } from '../route'
 
 export async function PUT(req: NextRequest) {
   const updateUseCase = new UpdateUseCase(subtasksRepository)
-
-  const { id, title, due_date } = await req.json()
+  
+  const id = req.nextUrl.pathname.split('/')[5]
+  const {title, due_date } = await req.json()
+  
 
   const updatedSubtask = await updateUseCase.execute({ id, title, due_date })
 
@@ -17,17 +19,17 @@ export async function PUT(req: NextRequest) {
 export async function PATCH(req: NextRequest) {
   const toggleCompletedUseCase = new ToggleCompletedUseCase(subtasksRepository)
 
-  const { id } = await req.json()
+  const id = req.nextUrl.pathname.split('/')[5]
 
   const updatedSubtask = await toggleCompletedUseCase.execute({ id })
 
-  return NextResponse.json(updatedSubtask, {status: 200})
+  return NextResponse.json(updatedSubtask, { status: 200 })
 }
 
 export async function DELETE(req: NextRequest) {
   const deleteUseCase = new DeleteUseCase(subtasksRepository)
 
-  const { id } = await req.json()
+  const id = req.nextUrl.pathname.split('/')[5]
 
   await deleteUseCase.execute({ id })
 
