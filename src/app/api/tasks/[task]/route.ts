@@ -21,7 +21,7 @@ export async function PATCH(req: NextRequest) {
 
   const { id } = await req.json()
 
-  const updatedTask = toggleCompletedUseCase.execute({ id })
+  const updatedTask = await toggleCompletedUseCase.execute({ id })
 
   return NextResponse.json(updatedTask, {status: 200})
 }
@@ -32,7 +32,7 @@ export async function DELETE(req: NextRequest) {
 
   const { id } = await req.json()
 
-  const deletedTask = deleteUseCase.execute({ id })
+  await deleteUseCase.execute({ id })
 
-  return NextResponse.json(deletedTask, {status: 200})
+  return NextResponse.json({status: 204})
 }
