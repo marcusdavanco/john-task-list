@@ -1,11 +1,11 @@
-import { SubtaskRepository } from "@/repositories/subtasks/subtask-repository";
-import { Subtask } from "@prisma/client";
-import { ResourceNotFoundError } from "../errors/resource-not-found-error";
+import { SubtaskRepository } from '@/repositories/subtasks/subtask-repository'
+import { Subtask } from '@prisma/client'
+import { ResourceNotFoundError } from '../errors/resource-not-found-error'
 
 interface UpdateUseCaseRequest {
-  id: string, 
-  title: string,
-  due_date?: Date,
+  id: string
+  title: string
+  due_date?: Date
 }
 
 export class UpdateUseCase {
@@ -14,21 +14,18 @@ export class UpdateUseCase {
   async execute({
     id,
     title,
-    due_date    
-  }:UpdateUseCaseRequest) : Promise<Subtask> {
+    due_date,
+  }: UpdateUseCaseRequest): Promise<Subtask> {
     const subtask = await this.SubtaskRepository.findById(id)
 
-    if(!subtask){
+    if (!subtask) {
       throw new ResourceNotFoundError()
     }
 
-    const updatedSubtask = await this.SubtaskRepository.update(
-      id, 
-      {
-        title,
-        due_date
-      }
-    )    
-    return updatedSubtask    
+    const updatedSubtask = await this.SubtaskRepository.update(id, {
+      title,
+      due_date,
+    })
+    return updatedSubtask
   }
 }

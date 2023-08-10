@@ -1,10 +1,9 @@
-import { InMemorySubtasksRepository } from '@/repositories/subtasks/in-memory/in-memory-repository' 
+import { InMemorySubtasksRepository } from '@/repositories/subtasks/in-memory/in-memory-repository'
 import { RegisterUseCase } from './register'
 import { ListUseCase } from './list'
 import { UpdateUseCase } from './update'
 import { ToggleCompletedUseCase } from './toggleCompleted'
 import { DeleteUseCase } from './delete'
-
 
 import { expect, it, describe } from 'vitest'
 
@@ -15,11 +14,11 @@ describe('Subtask Use-Cases', () => {
 
     const subtask = await registerUseCase.execute({
       title: 'New subtask',
-      due_date: new Date('2024-01-01'),      
-      task_id: 'task-1'
-    })   
+      due_date: new Date('2024-01-01'),
+      task_id: 'task-1',
+    })
 
-    expect(subtask.id).toEqual(expect.any(String));    
+    expect(subtask.id).toEqual(expect.any(String))
   })
 
   it('should be possible to list subtasks', async () => {
@@ -30,20 +29,19 @@ describe('Subtask Use-Cases', () => {
     await registerUseCase.execute({
       title: 'New subtask',
       due_date: new Date('2024-01-01'),
-      task_id: 'task-1'
-    })   
+      task_id: 'task-1',
+    })
 
-    const {subtasks} = await listUseCase.execute({ task_id: 'task-1'});
-
+    const { subtasks } = await listUseCase.execute({ task_id: 'task-1' })
 
     expect(subtasks).toEqual([
       expect.objectContaining({
-        title: 'New subtask',        
-      })
-    ]);    
+        title: 'New subtask',
+      }),
+    ])
   })
 
-  it('should be possible to update a subtask', async() => {
+  it('should be possible to update a subtask', async () => {
     const subtasksRepository = new InMemorySubtasksRepository()
     const registerUseCase = new RegisterUseCase(subtasksRepository)
     const updateUseCase = new UpdateUseCase(subtasksRepository)
@@ -51,7 +49,7 @@ describe('Subtask Use-Cases', () => {
     const subtask = await registerUseCase.execute({
       title: 'New subtask',
       due_date: new Date('2024-01-01'),
-      task_id: 'task-1'
+      task_id: 'task-1',
     })
 
     const updatedSubtask = await updateUseCase.execute({
@@ -66,15 +64,17 @@ describe('Subtask Use-Cases', () => {
   it('should be possible to toogle a subtask completion status', async () => {
     const subtasksRepository = new InMemorySubtasksRepository()
     const registerUseCase = new RegisterUseCase(subtasksRepository)
-    const toggleCompletedUseCase = new ToggleCompletedUseCase(subtasksRepository)
+    const toggleCompletedUseCase = new ToggleCompletedUseCase(
+      subtasksRepository,
+    )
 
     const subtask = await registerUseCase.execute({
       title: 'New task',
       due_date: new Date('2024-01-01'),
-      task_id: 'task-1'
+      task_id: 'task-1',
     })
 
-    const updatedSubtask1st= await toggleCompletedUseCase.execute({
+    const updatedSubtask1st = await toggleCompletedUseCase.execute({
       id: subtask.id,
     })
 
@@ -95,7 +95,7 @@ describe('Subtask Use-Cases', () => {
     const subtask = await registerUseCase.execute({
       title: 'New task',
       due_date: new Date('2024-01-01'),
-      task_id: 'task-1'
+      task_id: 'task-1',
     })
 
     const deletedTask = await deleteUseCase.execute({
@@ -103,6 +103,5 @@ describe('Subtask Use-Cases', () => {
     })
 
     expect(deletedTask).toBeTruthy()
-  })   
+  })
 })
-  

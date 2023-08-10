@@ -1,8 +1,8 @@
-import { SubtaskRepository } from "@/repositories/subtasks/subtask-repository";
-import { Subtask } from "@prisma/client";
+import { SubtaskRepository } from '@/repositories/subtasks/subtask-repository'
+import { Subtask } from '@prisma/client'
 
 interface ListUseCaseRequest {
-  task_id: string,
+  task_id: string
 }
 
 interface ListUseCaseResponse {
@@ -12,13 +12,11 @@ interface ListUseCaseResponse {
 export class ListUseCase {
   constructor(private SubtaskRepository: SubtaskRepository) {}
 
-  async execute({
-    task_id
-  }: ListUseCaseRequest) : Promise<ListUseCaseResponse> {
+  async execute({ task_id }: ListUseCaseRequest): Promise<ListUseCaseResponse> {
     const subtasks = await this.SubtaskRepository.list(task_id)
 
     return {
-      subtasks, 
+      subtasks,
     }
   }
 }

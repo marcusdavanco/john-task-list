@@ -1,10 +1,10 @@
-import { SubtaskRepository } from "@/repositories/subtasks/subtask-repository";
-import { Subtask } from "@prisma/client";
+import { SubtaskRepository } from '@/repositories/subtasks/subtask-repository'
+import { Subtask } from '@prisma/client'
 
 interface RegisterUseCaseRequest {
-  title: string;
-  due_date?: Date;
-  task_id: string;
+  title: string
+  due_date?: Date
+  task_id: string
 }
 
 export class RegisterUseCase {
@@ -13,18 +13,18 @@ export class RegisterUseCase {
   async execute({
     title,
     due_date,
-    task_id    
-  }:RegisterUseCaseRequest) : Promise<Subtask> {
+    task_id,
+  }: RegisterUseCaseRequest): Promise<Subtask> {
     const subtask = await this.SubtaskRepository.create({
       title,
       due_date,
       task: {
         connect: {
-          id: task_id
-        }
-      }
+          id: task_id,
+        },
+      },
     })
 
-    return subtask    
+    return subtask
   }
 }
