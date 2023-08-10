@@ -8,9 +8,8 @@ export function ManageTaskForm() {
   return (
     <form className="flex flex-col items-center w-full gap-7 mb-7">
       <header className="flex justify-between items-center w-full max-w-[46rem]">
-        <h2 className="text-secondary-300 font-bold uppercase text-xs">{`${
-          path.endsWith('manage') || path.endsWith('tasks') ? 'New' : 'Edit'
-        } ${path.includes('subtask') ? 'Subtask' : 'Task'}`}</h2>
+        <h2 className="text-secondary-300 font-bold uppercase text-xs">{`${path.endsWith('manage') || path.endsWith('tasks') ? 'New' : 'Edit'
+          } ${path.includes('subtask') ? 'Subtask' : 'Task'}`}</h2>
       </header>
       <section className="flex flex-col gap-4 w-full items-center">
         <Card customHeight>
@@ -19,7 +18,7 @@ export function ManageTaskForm() {
               <span className="text-xs uppercase font-bold mb-1">Due</span>
               <input
                 type="date"
-                className="border-white border-[1px] bg-transparent rounded-md h-10 p-3"
+                className="bg-white/30 invert text-black rounded-md h-10 p-3"
               />
             </label>
             <label className="flex flex-col gap-1">
@@ -29,7 +28,7 @@ export function ManageTaskForm() {
               <textarea
                 rows={3}
                 maxLength={120}
-                className="border-white border-[1px] bg-transparent rounded-md h-24 p-3"
+                className=" bg-white/30 invert text-black rounded-md h-24 p-3"
               />
             </label>
             <button className="px-4 py-2 bg-secondary-300 rounded-md font-bold text-sm">

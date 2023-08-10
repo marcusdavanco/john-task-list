@@ -44,4 +44,5 @@ input[type="date"]::after {
     right: 1.65rem;    
     @apply px-2 py-1;
     cursor: pointer;   
+    filter: invert(1);
   }
