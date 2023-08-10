@@ -12,7 +12,7 @@ export class PrismaSubtasksRepository implements SubtaskRepository {
   async list(task_id: string) {
     const subtasks = await prisma.subtask.findMany({
       where: {
-        id: task_id
+        task_id
       }
   })
     return subtasks

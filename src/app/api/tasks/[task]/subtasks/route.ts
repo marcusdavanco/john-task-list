@@ -9,7 +9,7 @@ export async function GET(req: NextRequest) {
   
   const listUseCase = new ListUseCase(subtasksRepository)
 
-  const { task_id } = await req.json()
+  const task_id = req.nextUrl.pathname.split('/')[3]
   
   const tasks = await listUseCase.execute({
     task_id
@@ -21,10 +21,11 @@ export async function GET(req: NextRequest) {
 export async function POST(req: NextRequest) {
   const registerUseCase = new RegisterUseCase(subtasksRepository)
 
-  const { title, due_date, task_id } = await req.json()
+  const { title, due_date} = await req.json()
+  const task_id = req.nextUrl.pathname.split('/')[3]
   
-  const task = await registerUseCase.execute({ title, due_date, task_id })  
+  const subtask = await registerUseCase.execute({ title, due_date, task_id })  
 
-  return NextResponse.json(task, {status: 201})
+  return NextResponse.json(subtask, {status: 201})
 }
 
