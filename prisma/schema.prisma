@@ -24,7 +24,7 @@ model Subtask {
   title     String
   completed Boolean   @default(false)
   due_date  DateTime?
-  task      Task      @relation(fields: [task_id], references: [id])
+  task      Task      @relation(fields: [task_id], references: [id], onDelete: Cascade)
 
   @@map("subtasks")
 }
