@@ -2,6 +2,7 @@ import { InMemoryTasksRepository } from '@/repositories/tasks/in-memory/in-memor
 import { RegisterUseCase } from './register'
 import { ListUseCase } from './list'
 import { UpdateUseCase } from './update'
+import { ToggleCompletedUseCase } from './toggleCompleted'
 
 
 import { expect, it, describe } from 'vitest'
@@ -58,15 +59,30 @@ describe('Tasks Use-Cases', () => {
     expect(updatedTask.title).toEqual('Updated task')
   })
 
-  it.todo('should be possible to mark a task as completed', () => {
+  it('should be possible to toogle a task completion status', async () => {
+    const tasksRepository = new InMemoryTasksRepository()
+    const registerUseCase = new RegisterUseCase(tasksRepository)
+    const toggleCompletedUseCase = new ToggleCompletedUseCase(tasksRepository)
+
+    const task = await registerUseCase.execute({
+      title: 'New task',
+      due_date: new Date('2024-01-01'),      
+    })
+
+    const updatedTask1st= await toggleCompletedUseCase.execute({
+      id: task.id,
+    })
+
+    expect(updatedTask1st.completed).toEqual(true)
+
+    const updatedTask2nd = await toggleCompletedUseCase.execute({
+      id: task.id,
+    })
+
+    expect(updatedTask2nd.completed).toEqual(false)
   })
 
   it.todo('should be possible to delete a task', () => {
-  })
-
-  it.todo('should be possible to order tasks', () => {
-  })
-
-    
+  })   
 })
   

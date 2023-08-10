@@ -4,12 +4,8 @@ import { TaskRepository } from "../task-repository"
 
 export class PrismaTasksRepository implements TaskRepository {
   
-  toggleCompleted(id: string): Promise<{ id: string; title: string; completed: boolean; due_date: Date | null; created_at: Date }> {
-    throw new Error("Method not implemented.")
-  }
-  delete(id: string): Promise<{ id: string; title: string; completed: boolean; due_date: Date | null; created_at: Date }> {
-    throw new Error("Method not implemented.")
-  }
+  
+  
   async create(data: Prisma.TaskCreateInput) {
     const task = await prisma.task.create({ data })
 
@@ -30,5 +26,38 @@ export class PrismaTasksRepository implements TaskRepository {
     })
 
     return task
+  }
+
+  async toggleCompleted(id: string) {
+    const task =  await prisma.task.findFirst({
+      where: {
+        id
+      }      
+    })
+
+    if(!task){
+      throw new Error('Task not found')
+    }
+
+    const updatedTask = await prisma.task.update({
+      where: {
+        id
+      },
+      data: {
+        completed: !task.completed
+      }
+    })
+
+    return updatedTask
+  }
+
+  async delete(id: string) {
+    const deletedTask = await prisma.task.delete({
+      where: {
+        id
+      },     
+    })
+
+    return deletedTask
   }
 }

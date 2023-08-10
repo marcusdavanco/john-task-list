@@ -1,15 +1,7 @@
 import { Prisma, Task } from '@prisma/client';
 import { TaskRepository } from '../task-repository';
 
-export class InMemoryTasksRepository implements TaskRepository {
-  
-  
-  toggleCompleted(id: string): Promise<{ id: string; title: string; completed: boolean; due_date: Date | null; created_at: Date; }> {
-    throw new Error('Method not implemented.');
-  }
-  delete(id: string): Promise<{ id: string; title: string; completed: boolean; due_date: Date | null; created_at: Date; }> {
-    throw new Error('Method not implemented.');
-  }
+export class InMemoryTasksRepository implements TaskRepository {  
   public items: Task[] = [];
   
   async create(data: Prisma.TaskCreateInput) {
@@ -34,7 +26,7 @@ export class InMemoryTasksRepository implements TaskRepository {
   async update(id: string, data: Prisma.TaskCreateInput) {
     const taskIndex = this.items.findIndex(task => task.id === id)
 
-    if (taskIndex === -1 || taskIndex === undefined) {
+    if (taskIndex === -1) {
       throw new Error('Task not found')
     }
     
@@ -47,5 +39,34 @@ export class InMemoryTasksRepository implements TaskRepository {
     this.items[taskIndex] = task
 
     return this.items[taskIndex]
-  }  
+  }
+  
+  async toggleCompleted(id: string) {
+    const taskIndex = this.items.findIndex(task => task.id === id)
+
+    if (taskIndex === -1) {
+      throw new Error('Task not found')
+    }
+    
+    const task = {
+      ...this.items[taskIndex],
+      completed: !this.items[taskIndex].completed,
+    };
+
+    this.items[taskIndex] = task
+
+    return this.items[taskIndex]
+  }
+
+  async delete(id: string){
+    const task = this.items.find(task => task.id === id)
+
+    if(!task){
+      throw new Error('Task not found')
+    }
+
+    this.items = this.items.filter(task => task.id !== id)
+
+    return task
+  }
 }
