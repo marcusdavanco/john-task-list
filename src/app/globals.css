@@ -45,4 +45,12 @@ input[type="date"]::after {
     @apply px-2 py-1;
     cursor: pointer;   
     filter: invert(1);
+    
   }
+
+  input[type="date"]:focus, textarea:focus  {
+    outline: #C2864E;
+    box-shadow: 0 0 0 2px #C2864E;
+  }
+
+  
