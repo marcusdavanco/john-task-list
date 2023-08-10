@@ -3,6 +3,7 @@ import { RegisterUseCase } from './register'
 import { ListUseCase } from './list'
 import { UpdateUseCase } from './update'
 import { ToggleCompletedUseCase } from './toggleCompleted'
+import { DeleteUseCase } from './delete'
 
 
 import { expect, it, describe } from 'vitest'
@@ -82,7 +83,21 @@ describe('Tasks Use-Cases', () => {
     expect(updatedTask2nd.completed).toEqual(false)
   })
 
-  it.todo('should be possible to delete a task', () => {
+  it('should be possible to delete a task', async () => {
+    const tasksRepository = new InMemoryTasksRepository()
+    const registerUseCase = new RegisterUseCase(tasksRepository)
+    const deleteUseCase = new DeleteUseCase(tasksRepository)
+
+    const task = await registerUseCase.execute({
+      title: 'New task',
+      due_date: new Date('2024-01-01'),      
+    })
+
+    const deletedTask = await deleteUseCase.execute({
+      id: task.id,
+    })
+
+    expect(deletedTask).toBeTruthy()
   })   
 })
   
