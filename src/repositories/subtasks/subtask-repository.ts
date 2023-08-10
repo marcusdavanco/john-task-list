@@ -6,4 +6,5 @@ export interface SubtaskRepository {
   toggleCompleted(id: string): Promise<Subtask>;
   delete(id: string): Promise<Subtask>;
   list(task_id: string): Promise<Subtask[]>;
+  findById(id: string): Promise<Subtask|null>;
 }

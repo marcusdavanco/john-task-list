@@ -3,8 +3,15 @@ import { Prisma } from "@prisma/client"
 import { TaskRepository } from "../task-repository"
 
 export class PrismaTasksRepository implements TaskRepository {
-  
-  
+  async findById(id: string){
+    const task = await prisma.task.findUnique({
+      where: {
+        id
+      }
+    })
+
+    return task
+  }  
   
   async create(data: Prisma.TaskCreateInput) {
     const task = await prisma.task.create({ data })

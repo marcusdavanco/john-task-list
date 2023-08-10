@@ -2,7 +2,17 @@ import { prisma } from "@/lib/prisma"
 import { Prisma } from "@prisma/client"
 import { SubtaskRepository } from "../subtask-repository"
 
-export class PrismaSubtasksRepository implements SubtaskRepository {  
+export class PrismaSubtasksRepository implements SubtaskRepository {
+  async findById(id: string){
+    const subtask = await prisma.subtask.findUnique({
+      where: {
+        id
+      }
+    })
+
+    return subtask
+  }  
+  
   async create(data: Prisma.SubtaskCreateInput) {
     const subtask = await prisma.subtask.create({ data })
 

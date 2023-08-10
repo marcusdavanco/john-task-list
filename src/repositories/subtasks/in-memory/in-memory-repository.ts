@@ -3,6 +3,12 @@ import { SubtaskRepository } from '../subtask-repository';
 
 export class InMemorySubtasksRepository implements SubtaskRepository {  
   public items: Subtask[] = [];
+
+  async findById(id: string){
+    const subtask = this.items.find(subtask => subtask.id === id) || null
+    
+    return subtask
+  }
   
   async create(data: Prisma.TaskCreateInput) {
     const subtask = {

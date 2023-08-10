@@ -6,4 +6,5 @@ export interface TaskRepository {
   toggleCompleted(id: string): Promise<Task>;
   delete(id: string): Promise<Task>;
   list(): Promise<Task[]>;
+  findById(id: string): Promise<Task|null>;
 }

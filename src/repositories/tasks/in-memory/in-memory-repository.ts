@@ -3,6 +3,12 @@ import { TaskRepository } from '../task-repository';
 
 export class InMemoryTasksRepository implements TaskRepository {  
   public items: Task[] = [];
+
+  async findById(id: string){
+    const task = this.items.find(task => task.id === id) || null
+    
+    return task
+  }
   
   async create(data: Prisma.TaskCreateInput) {
     const task = {
