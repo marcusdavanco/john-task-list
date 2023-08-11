@@ -22,7 +22,7 @@ export async function POST(req: NextRequest) {
 
   try {
     const { title, due_date } = registerBodySchema.parse(await req.json())
-    let dueDate = due_date ? new Date(due_date) : undefined
+    const dueDate = due_date ? new Date(due_date) : undefined
 
     const registerUseCase = new RegisterUseCase(tasksRepository)
 
