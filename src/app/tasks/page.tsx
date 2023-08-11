@@ -1,9 +1,15 @@
 import { Button } from '@/components/button'
-import { Task } from '@/components/task'
+import { Task as TaskCard } from '@/components/TaskList/components/task'
+import { Task } from '@prisma/client'
 
 import { ArrowUpDown } from 'lucide-react'
 
-export default function Tasks() {
+export default async function Tasks() {
+  const response = await fetch('http://localhost:3000/api/tasks', {
+    cache: 'no-store',
+  }) // TODO: get base url 
+  const { tasks } = await response.json()
+
   return (
     <main className="flex flex-1 h flex-col items-center px-[18px] py-7 relative">
       <div className="block w-full lg:flex gap-8 justify-center">
@@ -18,10 +24,10 @@ export default function Tasks() {
             />
           </header>
           <section className="flex flex-col gap-4 w-full items-center">
-            <Task />
-            <Task />
-            <Task />
-            <Task />
+            {tasks.map(task => {
+              return <TaskCard key={task.id} />
+            })}
+
           </section>
         </article>
         <article className="flex flex-col items-center w-full lg:max-w-[46rem] gap-7">
@@ -36,9 +42,9 @@ export default function Tasks() {
           </header>
 
           <section className="flex flex-col gap-4 w-full items-center">
-            <Task completed />
-            <Task completed />
-            <Task completed />
+            <TaskCard completed />
+            <TaskCard completed />
+            <TaskCard completed />
           </section>
         </article>
       </div>
