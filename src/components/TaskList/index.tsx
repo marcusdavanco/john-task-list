@@ -1,10 +1,11 @@
 'use client'
-
 import { ArrowUpDown } from "lucide-react"
 import { useTasks } from '@/hooks/queries/task'
+import { Task } from './components/task'
 
 interface TaskListProps {
   status: 'todo' | 'done'
+  kind: 'subtask' | 'task'
 }
 
 export function TaskList({ status }: TaskListProps) {
@@ -23,7 +24,7 @@ export function TaskList({ status }: TaskListProps) {
       </header>
       <section className="flex flex-col gap-4 w-full items-center">
         {tasks.map(task => {
-          return <TaskCard key={task.id} />
+          return <Task key={task.id} data={task} />
         })}
 
       </section>

@@ -1,16 +1,25 @@
 'use client'
 import { Calendar, Trash2 } from 'lucide-react'
-import { Card } from './card'
+import { Card } from '@/components/card'
 import { useRouter, usePathname } from 'next/navigation'
 import { useLongPress } from '@uidotdev/usehooks'
-
+import { type Task } from '@/types/task'
 interface TaskProps {
-  completed?: boolean
+  data: {
+    id: string,
+    completed: boolean,
+    title: string,
+    due_date: Date,
+    task_id?: string,
+  }
 }
 
-export function Task({ completed = false }: TaskProps) {
+export function Task({ data: { id, completed, title, due_date, task_id } }: TaskProps) {
   const path = usePathname()
   const router = useRouter()
+  const handleChange = () => {
+    // Use mutation to toogle completed task
+  }
 
   const attrs = useLongPress(
     () => {
@@ -28,7 +37,7 @@ export function Task({ completed = false }: TaskProps) {
           <input
             checked={completed}
             type="checkbox"
-            // onChange={handleChange}
+            onChange={handleChange}
             className={`appearance-none relative p-1 h-[26px] before:inline-block before:w-[18px] before:p-1 before:h-[18px] before:bg-transparent before:absolute: before:left-0 before:rounded-full before:border-2 before:border-secondary-300 before:transition before:duration-200 before:opacity-100 before:checked:opacity-0 after:inline-block after:w-[18px] after:h-[18px] after:left-[4px] after:top-[4px] after:checked:bg-secondary-300 after:absolute after:rounded-full after:border-2 after:border-none after:transition after:duration-200 after:opacity-100 after:checked:opacity-100 after:checked:bg-checkmark after:checked:bg-no-repeat after:checked:bg-center after:checked:bg-auto`}
           />
           <div className="flex flex-col gap-[10px]">
@@ -38,25 +47,22 @@ export function Task({ completed = false }: TaskProps) {
                 router.push(`${path}/foo/subtasks`)
               }
               {...attrs}
-              className={`font-bold line-clamp-1 mr-4 ${
-                completed ? ' text-gray-700 line-through' : 'text-gray-300'
-              }`}
+              className={`font-bold line-clamp-1 mr-4 ${completed ? ' text-gray-700 line-through' : 'text-gray-300'
+                }`}
             >
-              Really long todo description for testing purposes
+              {title}
             </span>
             <div className="flex gap-1 items-center">
               <Calendar
                 size={14}
-                className={`text-xs ${
-                  completed ? 'text-gray-700' : 'text-gray-400'
-                }`}
+                className={`text-xs ${completed ? 'text-gray-700' : 'text-gray-400'
+                  }`}
               />
               <span
-                className={`text-xs ${
-                  completed ? 'text-gray-700' : 'text-gray-500'
-                }`}
+                className={`text-xs ${completed ? 'text-gray-700' : 'text-gray-500'
+                  }`}
               >
-                Due 07/17/23
+                {due_date && due_date.toLocaleDateString()}
               </span>
             </div>
           </div>
