@@ -25,8 +25,8 @@ export function Task({ data: { id, completed, title, due_date } }: TaskProps) {
 
       return data
     },
-    onError: () => {
-      // TOO BAD :(
+    onError: () => (error: ErrorEvent) => {
+      console.error(error)
     },
     onSuccess: () => {
       queryClient.invalidateQueries(['tasks'])
@@ -40,12 +40,10 @@ export function Task({ data: { id, completed, title, due_date } }: TaskProps) {
       return data
     },
     onError: () => (error: ErrorEvent) => {
-      console.log(error)
+      console.error(error)
     },
     onSuccess: () => {
-      console.log('invalidating queries')
       queryClient.invalidateQueries(['tasks'])
-      console.log('queries invalidated')
     }
   })
 
