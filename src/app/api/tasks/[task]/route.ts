@@ -45,5 +45,5 @@ export async function DELETE(req: NextRequest) {
 
   await deleteUseCase.execute({ id })
 
-  return NextResponse.json({ message: 'Task removed' }, { status: 204 })
+  return NextResponse.json({ status: 204 })
 }

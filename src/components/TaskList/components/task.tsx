@@ -3,6 +3,8 @@ import { Calendar, Trash2 } from 'lucide-react'
 import { Card } from '@/components/card'
 import { useRouter, usePathname } from 'next/navigation'
 import { useLongPress } from '@uidotdev/usehooks'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
+import { api } from '@/lib/axios'
 interface TaskProps {
   data: {
     id: string
@@ -15,9 +17,44 @@ interface TaskProps {
 export function Task({ data: { id, completed, title, due_date } }: TaskProps) {
   const path = usePathname()
   const router = useRouter()
+  const queryClient = useQueryClient()
+
+  const toogleTaskComplete = useMutation({
+    mutationFn: (id: string) => {
+      const data = api.patch(`/tasks/${id}`)
+
+      return data
+    },
+    onError: () => {
+      // TOO BAD :(
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries(['tasks'])
+    }
+  })
+
+  const deleteTask = useMutation({
+    mutationFn: (id: string) => {
+      const data = api.delete(`/tasks/${id}`)
+
+      return data
+    },
+    onError: () => (error: ErrorEvent) => {
+      console.log(error)
+    },
+    onSuccess: () => {
+      console.log('invalidating queries')
+      queryClient.invalidateQueries(['tasks'])
+      console.log('queries invalidated')
+    }
+  })
 
   const handleChange = () => {
-    // Use mutation to toogle completed task
+    toogleTaskComplete.mutate(id)
+  }
+
+  const handleDelete = () => {
+    deleteTask.mutate(id)
   }
 
   const attrs = useLongPress(
@@ -46,30 +83,31 @@ export function Task({ data: { id, completed, title, due_date } }: TaskProps) {
                 router.push(`${path}/${id}/subtasks`)
               }
               {...attrs}
-              className={`font-bold line-clamp-1 mr-4 ${
-                completed ? ' text-gray-700 line-through' : 'text-gray-300'
-              }`}
+              className={`font-bold line-clamp-1 mr-4 ${completed ? ' text-gray-700 line-through' : 'text-gray-300'
+                }`}
             >
               {title}
             </span>
-            <div className="flex gap-1 items-center">
-              <Calendar
-                size={14}
-                className={`text-xs ${
-                  completed ? 'text-gray-700' : 'text-gray-400'
-                }`}
-              />
-              <span
-                className={`text-xs ${
-                  completed ? 'text-gray-700' : 'text-gray-500'
-                }`}
-              >
-                {due_date && due_date.toLocaleDateString()}
-              </span>
-            </div>
+
+            {due_date && (
+              <div className="flex gap-1 items-center">
+                <Calendar
+                  size={14}
+                  className={`text-xs ${completed ? 'text-gray-700' : 'text-gray-400'
+                    }`}
+                />
+                <span
+                  className={`text-xs ${completed ? 'text-gray-700' : 'text-gray-500'
+                    }`}
+                >
+                  {`Due ${new Date(due_date).toLocaleDateString()}`}
+                </span>
+              </div>
+            )}
+
           </div>
         </div>
-        <button>
+        <button onClick={handleDelete}>
           <Trash2
             size={20}
             className={`${completed ? 'text-gray-700' : 'text-gray-400'}`}

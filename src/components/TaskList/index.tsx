@@ -2,24 +2,27 @@
 import { ArrowUpDown } from 'lucide-react'
 import { useTasks } from '@/hooks/queries/task'
 import { Task } from './components/task'
+import { useEffect } from 'react'
 
 interface TaskListProps {
-  status: 'todo' | 'done'
+  complete: boolean
 }
 
-export function TaskList({ status }: TaskListProps) {
-  const { tasks } = useTasks()
+export function TaskList({ complete }: TaskListProps) {
+  const { data } = useTasks()
+  data && data.tasks
 
   return (
+
     <article className="flex flex-col items-center w-full lg:max-w-[46rem] gap-7 mb-7">
       <header className="flex justify-between items-center w-full max-w-[46rem]">
         <h2 className="text-secondary-300 font-bold uppercase text-xs">
-          {status}
+          {complete ? 'done' : 'to do'}
         </h2>
         <ArrowUpDown size={16} className="text-secondary-300 cursor-pointer" />
       </header>
       <section className="flex flex-col gap-4 w-full items-center">
-        {tasks.map((task) => {
+        {data && data.tasks.filter(task => task.completed === complete).map((task) => {
           return <Task key={task.id} data={task} />
         })}
       </section>
