@@ -27,11 +27,11 @@ export async function POST(req: NextRequest) {
     const registerUseCase = new RegisterUseCase(tasksRepository)
 
     await registerUseCase.execute({ title, due_date: dueDate })
-  } catch (err) {         
-    if (err instanceof z.ZodError) {      
+  } catch (err) {
+    if (err instanceof z.ZodError) {
       return NextResponse.json({ message: err.message }, { status: 422 })
-    }    
+    }
   }
 
-  return NextResponse.json({ message: 'Task created' }, { status: 201 }) 
+  return NextResponse.json({ message: 'Task created' }, { status: 201 })
 }

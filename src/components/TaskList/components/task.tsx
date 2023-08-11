@@ -3,20 +3,19 @@ import { Calendar, Trash2 } from 'lucide-react'
 import { Card } from '@/components/card'
 import { useRouter, usePathname } from 'next/navigation'
 import { useLongPress } from '@uidotdev/usehooks'
-import { type Task } from '@/types/task'
 interface TaskProps {
   data: {
-    id: string,
-    completed: boolean,
-    title: string,
-    due_date: Date,
-    task_id?: string,
+    id: string
+    completed: boolean
+    title: string
+    due_date: Date
   }
 }
 
-export function Task({ data: { id, completed, title, due_date, task_id } }: TaskProps) {
+export function Task({ data: { id, completed, title, due_date } }: TaskProps) {
   const path = usePathname()
   const router = useRouter()
+
   const handleChange = () => {
     // Use mutation to toogle completed task
   }
@@ -44,23 +43,26 @@ export function Task({ data: { id, completed, title, due_date, task_id } }: Task
             <span
               onClick={() =>
                 !path.endsWith('subtasks') &&
-                router.push(`${path}/foo/subtasks`)
+                router.push(`${path}/${id}/subtasks`)
               }
               {...attrs}
-              className={`font-bold line-clamp-1 mr-4 ${completed ? ' text-gray-700 line-through' : 'text-gray-300'
-                }`}
+              className={`font-bold line-clamp-1 mr-4 ${
+                completed ? ' text-gray-700 line-through' : 'text-gray-300'
+              }`}
             >
               {title}
             </span>
             <div className="flex gap-1 items-center">
               <Calendar
                 size={14}
-                className={`text-xs ${completed ? 'text-gray-700' : 'text-gray-400'
-                  }`}
+                className={`text-xs ${
+                  completed ? 'text-gray-700' : 'text-gray-400'
+                }`}
               />
               <span
-                className={`text-xs ${completed ? 'text-gray-700' : 'text-gray-500'
-                  }`}
+                className={`text-xs ${
+                  completed ? 'text-gray-700' : 'text-gray-500'
+                }`}
               >
                 {due_date && due_date.toLocaleDateString()}
               </span>

@@ -9,7 +9,7 @@ export async function PUT(req: NextRequest) {
   const updateBodySchema = z.object({
     title: z.string(),
     due_date: z.string().optional(),
-  })  
+  })
 
   const id = req.nextUrl.pathname.split('/')[5]
 
@@ -19,14 +19,13 @@ export async function PUT(req: NextRequest) {
     const dueDate = due_date ? new Date(due_date) : undefined
 
     await updateUseCase.execute({ id, title, due_date: dueDate })
-    
   } catch (err) {
-    if (err instanceof z.ZodError) {      
+    if (err instanceof z.ZodError) {
       return NextResponse.json({ message: err.message }, { status: 422 })
-    }   
-  }  
+    }
+  }
 
-  return NextResponse.json({ message: 'Subtask updated'}, { status: 200 })
+  return NextResponse.json({ message: 'Subtask updated' }, { status: 200 })
 }
 
 export async function PATCH(req: NextRequest) {
@@ -36,7 +35,7 @@ export async function PATCH(req: NextRequest) {
 
   const updatedSubtask = await toggleCompletedUseCase.execute({ id })
 
-  return NextResponse.json({ message: 'Subtask updated'}, { status: 200 })
+  return NextResponse.json({ message: 'Subtask updated' }, { status: 200 })
 }
 
 export async function DELETE(req: NextRequest) {

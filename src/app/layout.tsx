@@ -22,9 +22,7 @@ export default function RootLayout({
         className={`${roboto.className} bg-gradient-to-tl from-primary-400 to-[#111] h-screen flex flex-col`}
       >
         <Header />
-        <AppProviders>
-          {children}
-        </AppProviders>
+        <AppProviders>{children}</AppProviders>
       </body>
     </html>
   )

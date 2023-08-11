@@ -20,7 +20,7 @@ export async function GET(req: NextRequest) {
 
 export async function POST(req: NextRequest) {
   const task_id = req.nextUrl.pathname.split('/')[3]
-  
+
   const registerBodySchema = z.object({
     title: z.string(),
     due_date: z.string().optional(),
@@ -28,16 +28,15 @@ export async function POST(req: NextRequest) {
 
   try {
     const { title, due_date } = registerBodySchema.parse(await req.json())
-    let dueDate = due_date ? new Date(due_date) : undefined
+    const dueDate = due_date ? new Date(due_date) : undefined
 
     const registerUseCase = new RegisterUseCase(subtasksRepository)
     await registerUseCase.execute({ title, due_date: dueDate, task_id })
-
   } catch (err) {
-    if (err instanceof z.ZodError) {      
+    if (err instanceof z.ZodError) {
       return NextResponse.json({ message: err.message }, { status: 422 })
-    }   
-  }  
+    }
+  }
 
   return NextResponse.json({ message: 'Subtask created' }, { status: 201 })
 }

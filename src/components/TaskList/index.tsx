@@ -1,11 +1,10 @@
 'use client'
-import { ArrowUpDown } from "lucide-react"
+import { ArrowUpDown } from 'lucide-react'
 import { useTasks } from '@/hooks/queries/task'
 import { Task } from './components/task'
 
 interface TaskListProps {
   status: 'todo' | 'done'
-  kind: 'subtask' | 'task'
 }
 
 export function TaskList({ status }: TaskListProps) {
@@ -17,16 +16,12 @@ export function TaskList({ status }: TaskListProps) {
         <h2 className="text-secondary-300 font-bold uppercase text-xs">
           {status}
         </h2>
-        <ArrowUpDown
-          size={16}
-          className="text-secondary-300 cursor-pointer"
-        />
+        <ArrowUpDown size={16} className="text-secondary-300 cursor-pointer" />
       </header>
       <section className="flex flex-col gap-4 w-full items-center">
-        {tasks.map(task => {
+        {tasks.map((task) => {
           return <Task key={task.id} data={task} />
         })}
-
       </section>
     </article>
   )
