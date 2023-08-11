@@ -30,11 +30,7 @@ export async function POST(req: NextRequest) {
   } catch (err) {         
     if (err instanceof z.ZodError) {      
       return NextResponse.json({ message: err.message }, { status: 422 })
-    }
-
-    if (err instanceof Error) {      
-      return NextResponse.json({ message: err.message }, { status: 400 })
-    }
+    }    
   }
 
   return NextResponse.json({ message: 'Task created' }, { status: 201 }) 
