@@ -61,7 +61,7 @@ export function Task({ data: { id, completed, title, due_date, task_id = undefin
 
   const attrs = useLongPress(
     () => {
-      router.push(isSubtask ? `/tasks/${task_id}/manage/${id}` : `/tasks/manage/${id}`)
+      router.push(isSubtask ? `/tasks/${task_id}/subtasks/manage/${id}` : `/tasks/manage/${id}`)
     },
     {
       threshold: 500,

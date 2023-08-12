@@ -24,7 +24,7 @@ export function Header() {
         </button>
       )}
       <h1 className="text-secondary-300 uppercase font-bold lg:text-4xl lg:mx-auto">
-        {currentPath[currentPath.length - 1]}
+        {currentPath.includes('manage') ? 'manage' : currentPath[currentPath.length - 1]}
       </h1>
     </header>
   )
