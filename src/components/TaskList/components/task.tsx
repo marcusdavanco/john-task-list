@@ -5,35 +5,37 @@ import { useRouter, usePathname } from 'next/navigation'
 import { useLongPress } from '@uidotdev/usehooks'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { api } from '@/lib/axios'
-import { Task } from '@/types/task'
-import { Subtask } from '@/types/subtask'
+import { type Task } from '@/types/task'
 
+interface TaskOrSubtask extends Task {
+  task_id?: string
+}
 interface TaskProps {
-  data: Task | Subtask
+  data: TaskOrSubtask
 }
 
-export function Task({ data: { id, completed, title, due_date } }: TaskProps) {
+export function Task({ data: { id, completed, title, due_date, task_id = undefined } }: TaskProps) {
   const path = usePathname()
   const router = useRouter()
   const queryClient = useQueryClient()
 
+
   const toogleTaskComplete = useMutation({
     mutationFn: (id: string) => {
-      const data = api.patch(`/tasks/${id}`)
-
+      const data = api.patch(task_id ? `/tasks/${task_id}/subtasks/${id}` : `/tasks/${id}`)
       return data
     },
     onError: () => (error: ErrorEvent) => {
       console.error(error)
     },
     onSuccess: () => {
-      queryClient.invalidateQueries(['tasks'])
+      queryClient.invalidateQueries(task_id ? ['subtasks'] : ['tasks'])
     },
   })
 
   const deleteTask = useMutation({
     mutationFn: (id: string) => {
-      const data = api.delete(`/tasks/${id}`)
+      const data = api.delete(task_id ? `/tasks/${task_id}/subtasks/${id}` : `/tasks/${id}`)
 
       return data
     },
@@ -41,7 +43,7 @@ export function Task({ data: { id, completed, title, due_date } }: TaskProps) {
       console.error(error)
     },
     onSuccess: () => {
-      queryClient.invalidateQueries(['tasks'])
+      queryClient.invalidateQueries(task_id ? ['subtasks'] : ['tasks'])
     },
   })
 
