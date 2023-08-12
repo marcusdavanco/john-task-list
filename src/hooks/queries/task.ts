@@ -10,8 +10,13 @@ async function getTasks() {
   return data
 }
 
-export const useTasks = <TData = { tasks: Task[]} >(
-  options: UseQueryOptions<{ tasks: Task[] }, unknown, TData, TasksQueryKey> = {}
+export const useTasks = <TData = { tasks: Task[] }>(
+  options: UseQueryOptions<
+    { tasks: Task[] },
+    unknown,
+    TData,
+    TasksQueryKey
+  > = {},
 ) => {
   return useQuery({
     queryKey: ['tasks'],

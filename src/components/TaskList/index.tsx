@@ -23,7 +23,6 @@ export function TaskList({ complete }: TaskListProps) {
     initialData: { subtasks: [] },
   })
 
-
   const cardsToDisplay = useMemo(() => {
     if (path.includes('subtasks')) {
       if (!subtaskData) return []

@@ -15,7 +15,9 @@ interface TaskProps {
   data: TaskOrSubtask
 }
 
-export function Task({ data: { id, completed, title, due_date, task_id = undefined } }: TaskProps) {
+export function Task({
+  data: { id, completed, title, due_date, task_id = undefined },
+}: TaskProps) {
   const router = useRouter()
   const queryClient = useQueryClient()
 
@@ -23,10 +25,11 @@ export function Task({ data: { id, completed, title, due_date, task_id = undefin
     return !!task_id
   }, [])
 
-
   const toogleTaskComplete = useMutation({
     mutationFn: (id: string) => {
-      const data = api.patch(isSubtask ? `/tasks/${task_id}/subtasks/${id}` : `/tasks/${id}`)
+      const data = api.patch(
+        isSubtask ? `/tasks/${task_id}/subtasks/${id}` : `/tasks/${id}`,
+      )
       return data
     },
     onError: () => (error: ErrorEvent) => {
@@ -39,7 +42,9 @@ export function Task({ data: { id, completed, title, due_date, task_id = undefin
 
   const deleteTask = useMutation({
     mutationFn: (id: string) => {
-      const data = api.delete(isSubtask ? `/tasks/${task_id}/subtasks/${id}` : `/tasks/${id}`)
+      const data = api.delete(
+        isSubtask ? `/tasks/${task_id}/subtasks/${id}` : `/tasks/${id}`,
+      )
 
       return data
     },
@@ -61,7 +66,11 @@ export function Task({ data: { id, completed, title, due_date, task_id = undefin
 
   const attrs = useLongPress(
     () => {
-      router.push(isSubtask ? `/tasks/${task_id}/subtasks/manage/${id}` : `/tasks/manage/${id}`)
+      router.push(
+        isSubtask
+          ? `/tasks/${task_id}/subtasks/manage/${id}`
+          : `/tasks/manage/${id}`,
+      )
     },
     {
       threshold: 500,
@@ -80,13 +89,11 @@ export function Task({ data: { id, completed, title, due_date, task_id = undefin
           />
           <div className="flex flex-col gap-[10px]">
             <span
-              onClick={() =>
-                !isSubtask &&
-                router.push(`/tasks/${id}/subtasks`)
-              }
+              onClick={() => !isSubtask && router.push(`/tasks/${id}/subtasks`)}
               {...attrs}
-              className={`font-bold line-clamp-1 mr-4 ${completed ? ' text-gray-700 line-through' : 'text-gray-300'
-                }`}
+              className={`font-bold line-clamp-1 mr-4 ${
+                completed ? ' text-gray-700 line-through' : 'text-gray-300'
+              }`}
             >
               {title}
             </span>
@@ -95,12 +102,14 @@ export function Task({ data: { id, completed, title, due_date, task_id = undefin
               <div className="flex gap-1 items-center">
                 <Calendar
                   size={14}
-                  className={`text-xs ${completed ? 'text-gray-700' : 'text-gray-400'
-                    }`}
+                  className={`text-xs ${
+                    completed ? 'text-gray-700' : 'text-gray-400'
+                  }`}
                 />
                 <span
-                  className={`text-xs ${completed ? 'text-gray-700' : 'text-gray-500'
-                    }`}
+                  className={`text-xs ${
+                    completed ? 'text-gray-700' : 'text-gray-500'
+                  }`}
                 >
                   {`Due ${new Date(due_date).toLocaleDateString()}`}
                 </span>
