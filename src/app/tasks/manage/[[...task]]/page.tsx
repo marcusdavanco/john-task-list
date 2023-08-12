@@ -1,4 +1,4 @@
-import { ManageTaskForm } from '@/components/ManageTaskForm'
+import { ManageTaskForm } from '@/components/manage-task-form'
 
 export default function Tasks() {
   return (
