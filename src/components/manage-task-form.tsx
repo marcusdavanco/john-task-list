@@ -14,7 +14,7 @@ export function ManageTaskForm() {
   const queryClient = useQueryClient()
 
   const isSubtask: boolean = useMemo(() => {
-    return path.includes('subtask')
+    return path.includes('subtasks')
   }, [])
 
   const isNew: boolean = useMemo(() => {
@@ -36,13 +36,13 @@ export function ManageTaskForm() {
   })
 
   const save = useMutation({
-    mutationFn: (data: ManageFormInputs) => api.post(`/tasks`, data),
+    mutationFn: (data: ManageFormInputs) => isSubtask ? api.post(`/tasks/${path.split('/')[2]}/subtasks`, data) : api.post(`/tasks`, data),
     onError: () => (error: ErrorEvent) => {
       console.log(error)
     },
     onSuccess: () => {
-      queryClient.invalidateQueries(['tasks'])
-      router.push('/tasks')
+      queryClient.invalidateQueries(isSubtask ? ['subtasks'] : ['tasks'])
+      router.push(isSubtask ? `/tasks/${path.split('/')[2]}/subtasks` : '/tasks')
     },
   })
 
