@@ -1,11 +1,12 @@
 'use client'
 import { Calendar, Trash2 } from 'lucide-react'
 import { Card } from '@/components/card'
-import { useRouter, usePathname } from 'next/navigation'
+import { useRouter } from 'next/navigation'
 import { useLongPress } from '@uidotdev/usehooks'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { api } from '@/lib/axios'
 import { type Task } from '@/types/task'
+import { useMemo } from 'react'
 
 interface TaskOrSubtask extends Task {
   task_id?: string
@@ -15,27 +16,30 @@ interface TaskProps {
 }
 
 export function Task({ data: { id, completed, title, due_date, task_id = undefined } }: TaskProps) {
-  const path = usePathname()
   const router = useRouter()
   const queryClient = useQueryClient()
+
+  const isSubtask: boolean = useMemo(() => {
+    return !!task_id
+  }, [])
 
 
   const toogleTaskComplete = useMutation({
     mutationFn: (id: string) => {
-      const data = api.patch(task_id ? `/tasks/${task_id}/subtasks/${id}` : `/tasks/${id}`)
+      const data = api.patch(isSubtask ? `/tasks/${task_id}/subtasks/${id}` : `/tasks/${id}`)
       return data
     },
     onError: () => (error: ErrorEvent) => {
       console.error(error)
     },
     onSuccess: () => {
-      queryClient.invalidateQueries(task_id ? ['subtasks'] : ['tasks'])
+      queryClient.invalidateQueries(isSubtask ? ['subtasks'] : ['tasks'])
     },
   })
 
   const deleteTask = useMutation({
     mutationFn: (id: string) => {
-      const data = api.delete(task_id ? `/tasks/${task_id}/subtasks/${id}` : `/tasks/${id}`)
+      const data = api.delete(isSubtask ? `/tasks/${task_id}/subtasks/${id}` : `/tasks/${id}`)
 
       return data
     },
@@ -43,7 +47,7 @@ export function Task({ data: { id, completed, title, due_date, task_id = undefin
       console.error(error)
     },
     onSuccess: () => {
-      queryClient.invalidateQueries(task_id ? ['subtasks'] : ['tasks'])
+      queryClient.invalidateQueries(isSubtask ? ['subtasks'] : ['tasks'])
     },
   })
 
@@ -57,7 +61,7 @@ export function Task({ data: { id, completed, title, due_date, task_id = undefin
 
   const attrs = useLongPress(
     () => {
-      router.push(`${path}/manage/${id}`)
+      router.push(isSubtask ? `/tasks/${task_id}/manage/${id}` : `/tasks/manage/${id}`)
     },
     {
       threshold: 500,
@@ -77,8 +81,8 @@ export function Task({ data: { id, completed, title, due_date, task_id = undefin
           <div className="flex flex-col gap-[10px]">
             <span
               onClick={() =>
-                !path.endsWith('subtasks') &&
-                router.push(`${path}/${id}/subtasks`)
+                !isSubtask &&
+                router.push(`/tasks/${id}/subtasks`)
               }
               {...attrs}
               className={`font-bold line-clamp-1 mr-4 ${completed ? ' text-gray-700 line-through' : 'text-gray-300'
