@@ -5,13 +5,11 @@ import { useRouter, usePathname } from 'next/navigation'
 import { useLongPress } from '@uidotdev/usehooks'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { api } from '@/lib/axios'
+import { Task } from '@/types/task'
+import { Subtask } from '@/types/subtask'
+
 interface TaskProps {
-  data: {
-    id: string
-    completed: boolean
-    title: string
-    due_date: Date
-  }
+  data: Task | Subtask
 }
 
 export function Task({ data: { id, completed, title, due_date } }: TaskProps) {
@@ -30,7 +28,7 @@ export function Task({ data: { id, completed, title, due_date } }: TaskProps) {
     },
     onSuccess: () => {
       queryClient.invalidateQueries(['tasks'])
-    }
+    },
   })
 
   const deleteTask = useMutation({
@@ -44,7 +42,7 @@ export function Task({ data: { id, completed, title, due_date } }: TaskProps) {
     },
     onSuccess: () => {
       queryClient.invalidateQueries(['tasks'])
-    }
+    },
   })
 
   const handleChange = () => {
@@ -57,7 +55,7 @@ export function Task({ data: { id, completed, title, due_date } }: TaskProps) {
 
   const attrs = useLongPress(
     () => {
-      router.push(`${path}/manage/foo`)
+      router.push(`${path}/manage/${id}`)
     },
     {
       threshold: 500,
@@ -102,7 +100,6 @@ export function Task({ data: { id, completed, title, due_date } }: TaskProps) {
                 </span>
               </div>
             )}
-
           </div>
         </div>
         <button onClick={handleDelete}>
