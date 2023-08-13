@@ -91,8 +91,11 @@ export function Task({
             <span
               onClick={() => !isSubtask && router.push(`/tasks/${id}/subtasks`)}
               {...attrs}
-              className={`font-bold line-clamp-1 mr-4 ${completed ? ' text-gray-700 line-through' : 'text-gray-300 cursor-pointer'
-                }`}
+              className={`font-bold line-clamp-1 mr-4 ${
+                completed
+                  ? ' text-gray-700 line-through'
+                  : 'text-gray-300 cursor-pointer'
+              }`}
             >
               {title}
             </span>
@@ -101,14 +104,18 @@ export function Task({
               <div className="flex gap-1 items-center">
                 <Calendar
                   size={14}
-                  className={`text-xs ${completed ? 'text-gray-700' : 'text-gray-400'
-                    }`}
+                  className={`text-xs ${
+                    completed ? 'text-gray-700' : 'text-gray-400'
+                  }`}
                 />
                 <span
-                  className={`text-xs ${completed ? 'text-gray-700' : 'text-gray-500'
-                    }`}
+                  className={`text-xs ${
+                    completed ? 'text-gray-700' : 'text-gray-500'
+                  }`}
                 >
-                  {`Due ${due_date.split('T')[0].replace(/(\d{4})-(\d{2})-(\d{2})/g, '$3/$2/$1')}`}
+                  {`Due ${due_date
+                    .split('T')[0]
+                    .replace(/(\d{4})-(\d{2})-(\d{2})/g, '$3/$2/$1')}`}
                 </span>
               </div>
             )}

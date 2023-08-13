@@ -17,12 +17,16 @@ interface TaskListProps {
 }
 
 export function TaskList({ complete }: TaskListProps) {
-  const [sortMethod, setSortMethod] = useState<SortOptions>(SortOptions.CREATED_AT)
+  const [sortMethod, setSortMethod] = useState<SortOptions>(
+    SortOptions.CREATED_AT,
+  )
   const path = usePathname()
 
   const handleSort = () => {
-    let newSortMethod = sortMethod === SortOptions.TITLE ? SortOptions.DUE_DATE : SortOptions.TITLE
-
+    const newSortMethod =
+      sortMethod === SortOptions.TITLE
+        ? SortOptions.DUE_DATE
+        : SortOptions.TITLE
 
     setSortMethod(newSortMethod)
 
@@ -31,14 +35,14 @@ export function TaskList({ complete }: TaskListProps) {
         return a.title.localeCompare(b.title)
       }
       if (newSortMethod === SortOptions.DUE_DATE) {
-        const aDate = a.due_date ? new Date(a.due_date) : null;
-        const bDate = b.due_date ? new Date(b.due_date) : null;
+        const aDate = a.due_date ? new Date(a.due_date) : null
+        const bDate = b.due_date ? new Date(b.due_date) : null
 
-        if (!aDate && !bDate) return 0;
-        if (!aDate) return 1;
-        if (!bDate) return -1;
+        if (!aDate && !bDate) return 0
+        if (!aDate) return 1
+        if (!bDate) return -1
 
-        return aDate.getTime() - bDate.getTime();
+        return aDate.getTime() - bDate.getTime()
       }
       return 0
     })
@@ -74,7 +78,11 @@ export function TaskList({ complete }: TaskListProps) {
             {complete ? 'done' : 'to do'}
           </h2>
           <div className="flex items-center gap-1">
-            <span className="text-secondary-300 text-xs font-bold uppercase">{`${sortMethod === SortOptions.CREATED_AT ? '' : sortMethod.replace('_', ' ')}`}</span>
+            <span className="text-secondary-300 text-xs font-bold uppercase">{`${
+              sortMethod === SortOptions.CREATED_AT
+                ? ''
+                : sortMethod.replace('_', ' ')
+            }`}</span>
             <button onClick={handleSort}>
               <ArrowUpDown
                 size={16}

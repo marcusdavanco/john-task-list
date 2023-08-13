@@ -35,7 +35,6 @@ export function ManageForm() {
     { enabled: isSubtask && !isNew },
   )
 
-
   const ManageFormSchema = z.object({
     due_date: z.string().optional(),
     title: z.string().min(1, { message: 'Title is required' }),
@@ -67,7 +66,10 @@ export function ManageForm() {
   const update = useMutation({
     mutationFn: (data: ManageFormInputs) =>
       isSubtask
-        ? api.put(`/tasks/${path.split('/')[2]}/subtasks/${path.split('/')[5]}`, data)
+        ? api.put(
+            `/tasks/${path.split('/')[2]}/subtasks/${path.split('/')[5]}`,
+            data,
+          )
         : api.put(`/tasks/${path.split('/')[3]}`, data),
     onError: () => (error: ErrorEvent) => {
       console.log(error)
@@ -112,8 +114,9 @@ export function ManageForm() {
       onSubmit={handleSubmit(onSubmit)}
     >
       <header className="flex justify-between items-center w-full max-w-[46rem]">
-        <h2 className="text-secondary-300 font-bold uppercase text-xs">{`${path.endsWith('manage') || path.endsWith('tasks') ? 'New' : 'Edit'
-          } ${path.includes('subtask') ? 'Subtask' : 'Task'}`}</h2>
+        <h2 className="text-secondary-300 font-bold uppercase text-xs">{`${
+          path.endsWith('manage') || path.endsWith('tasks') ? 'New' : 'Edit'
+        } ${path.includes('subtask') ? 'Subtask' : 'Task'}`}</h2>
       </header>
       <section className="flex flex-col gap-4 w-full items-center">
         <Card customHeight>
