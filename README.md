@@ -30,7 +30,7 @@ This command will create the required tables and structures within the SQLite da
 Once the dependencies are installed and the database schema is migrated, start the development server with the following command:
 
 ```console
-npx prisma migrate dev
+npx run dev
 ```
 This command will launch the development server, making your application accessible for testing and development.
 
