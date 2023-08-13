@@ -16,7 +16,7 @@ export function Header() {
           className="text-primary-100 cursor-not-allowed"
         />
       ) : (
-        <button onClick={() => router.push(`/tasks`)}>
+        <button onClick={() => router.push('../')}>
           <ChevronLeft
             size={24}
             className="text-primary-100 cursor-pointer lg:mr-auto block"
