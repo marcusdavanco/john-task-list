@@ -91,7 +91,7 @@ export function Task({
             <span
               onClick={() => !isSubtask && router.push(`/tasks/${id}/subtasks`)}
               {...attrs}
-              className={`font-bold line-clamp-1 mr-4 ${completed ? ' text-gray-700 line-through' : 'text-gray-300'
+              className={`font-bold line-clamp-1 mr-4 ${completed ? ' text-gray-700 line-through' : 'text-gray-300 cursor-pointer'
                 }`}
             >
               {title}
