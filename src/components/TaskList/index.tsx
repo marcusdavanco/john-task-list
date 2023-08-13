@@ -40,9 +40,6 @@ export function TaskList({ complete }: TaskListProps) {
 
         return aDate.getTime() - bDate.getTime();
       }
-      if (newSortMethod === SortOptions.CREATED_AT) {
-        return new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime();
-      }
       return 0
     })
   }
@@ -77,7 +74,7 @@ export function TaskList({ complete }: TaskListProps) {
             {complete ? 'done' : 'to do'}
           </h2>
           <div className="flex items-center gap-1">
-            <span className="text-secondary-300 text-xs font-bold uppercase">{`${sortMethod.replace('_', ' ')}`}</span>
+            <span className="text-secondary-300 text-xs font-bold uppercase">{`${sortMethod === SortOptions.CREATED_AT ? '' : sortMethod.replace('_', ' ')}`}</span>
             <button onClick={handleSort}>
               <ArrowUpDown
                 size={16}
