@@ -36,13 +36,18 @@ export function ManageTaskForm() {
   })
 
   const save = useMutation({
-    mutationFn: (data: ManageFormInputs) => isSubtask ? api.post(`/tasks/${path.split('/')[2]}/subtasks`, data) : api.post(`/tasks`, data),
+    mutationFn: (data: ManageFormInputs) =>
+      isSubtask
+        ? api.post(`/tasks/${path.split('/')[2]}/subtasks`, data)
+        : api.post(`/tasks`, data),
     onError: () => (error: ErrorEvent) => {
       console.log(error)
     },
     onSuccess: () => {
       queryClient.invalidateQueries(isSubtask ? ['subtasks'] : ['tasks'])
-      router.push(isSubtask ? `/tasks/${path.split('/')[2]}/subtasks` : '/tasks')
+      router.push(
+        isSubtask ? `/tasks/${path.split('/')[2]}/subtasks` : '/tasks',
+      )
     },
   })
 
@@ -62,8 +67,9 @@ export function ManageTaskForm() {
       onSubmit={handleSubmit(onSubmit)}
     >
       <header className="flex justify-between items-center w-full max-w-[46rem]">
-        <h2 className="text-secondary-300 font-bold uppercase text-xs">{`${path.endsWith('manage') || path.endsWith('tasks') ? 'New' : 'Edit'
-          } ${path.includes('subtask') ? 'Subtask' : 'Task'}`}</h2>
+        <h2 className="text-secondary-300 font-bold uppercase text-xs">{`${
+          path.endsWith('manage') || path.endsWith('tasks') ? 'New' : 'Edit'
+        } ${path.includes('subtask') ? 'Subtask' : 'Task'}`}</h2>
       </header>
       <section className="flex flex-col gap-4 w-full items-center">
         <Card customHeight>

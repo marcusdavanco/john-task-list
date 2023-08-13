@@ -5,6 +5,14 @@ import { DeleteUseCase } from '@/use-cases/tasks/delete'
 import { tasksRepository } from '../route'
 import { z } from 'zod'
 
+export async function GET(req: NextRequest) {
+  const id = req.nextUrl.pathname.split('/').pop()!
+
+  const task = await tasksRepository.findById(id)
+
+  return NextResponse.json(task, { status: 200 })
+}
+
 export async function PUT(req: NextRequest) {
   const updateBodySchema = z.object({
     title: z.string(),

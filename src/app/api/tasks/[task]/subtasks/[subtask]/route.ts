@@ -5,6 +5,14 @@ import { DeleteUseCase } from '@/use-cases/subtasks/delete'
 import { subtasksRepository } from '../route'
 import { z } from 'zod'
 
+export async function GET(req: NextRequest) {
+  const id = req.nextUrl.pathname.split('/')[5]
+
+  const subtask = await subtasksRepository.findById(id)
+
+  return NextResponse.json(subtask, { status: 200 })
+}
+
 export async function PUT(req: NextRequest) {
   const updateBodySchema = z.object({
     title: z.string(),
