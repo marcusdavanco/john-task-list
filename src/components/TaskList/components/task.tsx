@@ -2,6 +2,7 @@
 import { Calendar, Trash2 } from 'lucide-react'
 import { Card } from '@/components/card'
 import { useRouter } from 'next/navigation'
+// @ts-expect-error This package is not typed
 import { useLongPress } from '@uidotdev/usehooks'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { api } from '@/lib/axios'

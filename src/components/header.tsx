@@ -11,10 +11,7 @@ export function Header() {
   return (
     <header className="flex justify-between border-b-2 border-primary-100 px-3 py-[18px] lg:justify-center lg:bg-black lg:border-none lg:py-[4rem]">
       {pathname.endsWith('/tasks') ? (
-        <Menu
-          size={24}
-          className="text-primary-100 cursor-not-allowed"
-        />
+        <Menu size={24} className="text-primary-100 cursor-not-allowed" />
       ) : (
         <button onClick={() => router.push('../')}>
           <ChevronLeft
