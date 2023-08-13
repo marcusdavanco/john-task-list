@@ -1,17 +1,51 @@
 'use client'
-import { ArrowUpDown } from 'lucide-react'
+import { ArrowUpDown, SortAscIcon } from 'lucide-react'
 import { useTasks } from '@/hooks/queries/task'
 import { useSubtasks } from '@/hooks/queries/subtask'
 import { Task } from './components/task'
-import { useMemo } from 'react'
+import { useMemo, useState } from 'react'
 import { usePathname } from 'next/navigation'
+
+enum SortOptions {
+  TITLE = 'title',
+  DUE_DATE = 'due_date',
+  CREATED_AT = 'created_at',
+}
 
 interface TaskListProps {
   complete: boolean
 }
 
 export function TaskList({ complete }: TaskListProps) {
+  const [sortMethod, setSortMethod] = useState<SortOptions>(SortOptions.CREATED_AT)
   const path = usePathname()
+
+  const handleSort = () => {
+    let newSortMethod = sortMethod === SortOptions.TITLE ? SortOptions.DUE_DATE : SortOptions.TITLE
+
+
+    setSortMethod(newSortMethod)
+
+    cardsToDisplay.sort((a, b) => {
+      if (newSortMethod === SortOptions.TITLE) {
+        return a.title.localeCompare(b.title)
+      }
+      if (newSortMethod === SortOptions.DUE_DATE) {
+        const aDate = a.due_date ? new Date(a.due_date) : null;
+        const bDate = b.due_date ? new Date(b.due_date) : null;
+
+        if (!aDate && !bDate) return 0;
+        if (!aDate) return 1;
+        if (!bDate) return -1;
+
+        return aDate.getTime() - bDate.getTime();
+      }
+      if (newSortMethod === SortOptions.CREATED_AT) {
+        return new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime();
+      }
+      return 0
+    })
+  }
 
   const { data: taskData } = useTasks({
     enabled: !path.includes('subtasks'),
@@ -42,10 +76,15 @@ export function TaskList({ complete }: TaskListProps) {
           <h2 className="text-secondary-300 font-bold uppercase text-xs">
             {complete ? 'done' : 'to do'}
           </h2>
-          <ArrowUpDown
-            size={16}
-            className="text-secondary-300 cursor-pointer"
-          />
+          <div className="flex items-center gap-1">
+            <span className="text-secondary-300 text-xs font-bold uppercase">{`${sortMethod.replace('_', ' ')}`}</span>
+            <button onClick={handleSort}>
+              <ArrowUpDown
+                size={16}
+                className="text-secondary-300 cursor-pointer"
+              />
+            </button>
+          </div>
         </header>
       )}
       <section className="flex flex-col gap-4 w-full items-center">
