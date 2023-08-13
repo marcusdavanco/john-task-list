@@ -19,7 +19,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${roboto.className} bg-gradient-to-tl from-primary-400 to-[#111] h-screen flex flex-col`}
+        className={`${roboto.className} bg-gradient-to-tl from-primary-400 to-[#111] h-full flex flex-col`}
       >
         <Header />
         <AppProviders>{children}</AppProviders>
