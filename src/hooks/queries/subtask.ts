@@ -22,7 +22,7 @@ async function getSubtaskById({
 }: QueryFunctionContext<SubtaskByIdQueryKey>) {
   const [, taskId, id] = queryKey
   const { data } = await api.get(`/tasks/${taskId}/subtasks/${id}`)
-  
+
   return data
 }
 
@@ -46,12 +46,7 @@ export const useSubtasks = <SData = { subtasks: Subtask[] }>(
 export const useSubtaskById = <Subtask>(
   taskId: string,
   id: string,
-  options: UseQueryOptions<
-    Subtask,
-    unknown,
-    Subtask,
-    SubtaskByIdQueryKey
-  > = {},
+  options: UseQueryOptions<Subtask, unknown, Subtask, SubtaskByIdQueryKey> = {},
 ) => {
   return useQuery<Subtask, unknown, Subtask, SubtaskByIdQueryKey>({
     queryKey: ['subtasks', taskId, id],

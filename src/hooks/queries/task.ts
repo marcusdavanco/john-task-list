@@ -1,5 +1,9 @@
 import { api } from '@/lib/axios'
-import { QueryFunctionContext, UseQueryOptions, useQuery } from '@tanstack/react-query'
+import {
+  QueryFunctionContext,
+  UseQueryOptions,
+  useQuery,
+} from '@tanstack/react-query'
 import { Task } from '@/types/task'
 
 export type TasksQueryKey = ['tasks']
@@ -11,8 +15,10 @@ async function getTasks() {
   return data
 }
 
-async function getTaskById({ queryKey} : QueryFunctionContext<TaskByIdQueryKey>) {
-  const [ , id ] = queryKey
+async function getTaskById({
+  queryKey,
+}: QueryFunctionContext<TaskByIdQueryKey>) {
+  const [, id] = queryKey
   const { data } = await api.get(`/tasks/${id}`)
 
   return data

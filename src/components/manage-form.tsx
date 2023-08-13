@@ -6,9 +6,13 @@ import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { api } from '@/lib/axios'
-import { useMemo } from 'react'
+import { useEffect, useMemo } from 'react'
+import { useTaskById } from '@/hooks/queries/task'
+import { useSubtaskById } from '@/hooks/queries/subtask'
+import { Task } from '@/types/task'
+import { Subtask } from '@/types/subtask'
 
-export function ManageTaskForm() {
+export function ManageForm() {
   const path = usePathname()
   const router = useRouter()
   const queryClient = useQueryClient()
@@ -18,11 +22,18 @@ export function ManageTaskForm() {
   }, [])
 
   const isNew: boolean = useMemo(() => {
-    return path.endsWith('subtasks') || path.endsWith('tasks')
+    return path.endsWith('manage')
   }, [])
 
-  // const { data: task } = useTaskById({ enabled: !isSubtask && !isNew })
-  // const { data: subtask } = useSubtaskbyId({ enabled: isSubtask && !isNew })
+  const { data: task } = useTaskById<Task>(path.split('/')[3], {
+    enabled: !isSubtask && !isNew,
+  })
+
+  const { data: subtask } = useSubtaskById<Subtask>(
+    path.split('/')[3],
+    path.split('/')[6],
+    { enabled: isSubtask && !isNew },
+  )
 
   const ManageFormSchema = z.object({
     due_date: z.string().optional(),
@@ -31,9 +42,10 @@ export function ManageTaskForm() {
 
   type ManageFormInputs = z.infer<typeof ManageFormSchema>
 
-  const { register, handleSubmit, formState } = useForm<ManageFormInputs>({
-    resolver: zodResolver(ManageFormSchema),
-  })
+  const { register, handleSubmit, formState, reset } =
+    useForm<ManageFormInputs>({
+      resolver: zodResolver(ManageFormSchema),
+    })
 
   const save = useMutation({
     mutationFn: (data: ManageFormInputs) =>
@@ -51,6 +63,22 @@ export function ManageTaskForm() {
     },
   })
 
+  const update = useMutation({
+    mutationFn: (data: ManageFormInputs) =>
+      isSubtask
+        ? api.post(`/tasks/${path.split('/')[6]}/subtasks/`, data)
+        : api.post(`/tasks/${path.split('/')[3]}`, data),
+    onError: () => (error: ErrorEvent) => {
+      console.log(error)
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries(isSubtask ? ['subtasks'] : ['tasks'])
+      router.push(
+        isSubtask ? `/tasks/${path.split('/')[3]}/subtasks/` : '/tasks',
+      )
+    },
+  })
+
   const onSubmit: SubmitHandler<ManageFormInputs> = async (
     data: ManageFormInputs,
   ) => {
@@ -58,8 +86,24 @@ export function ManageTaskForm() {
       return
     }
 
-    save.mutate(data)
+    isNew ? save.mutate(data) : update.mutate(data)
   }
+
+  useEffect(() => {
+    if (isNew) {
+      reset({
+        title: '',
+        due_date: '',
+      })
+    }
+
+    reset({
+      title: isSubtask ? subtask?.title : task?.title,
+      due_date: isSubtask
+        ? subtask?.due_date?.split('T')[0]
+        : task?.due_date?.split('T')[0],
+    })
+  }, [task, subtask, isNew, isSubtask, reset])
 
   return (
     <form
