@@ -30,10 +30,11 @@ export function ManageForm() {
   })
 
   const { data: subtask } = useSubtaskById<Subtask>(
-    path.split('/')[3],
-    path.split('/')[6],
+    path.split('/')[2],
+    path.split('/')[5],
     { enabled: isSubtask && !isNew },
   )
+
 
   const ManageFormSchema = z.object({
     due_date: z.string().optional(),
@@ -66,15 +67,15 @@ export function ManageForm() {
   const update = useMutation({
     mutationFn: (data: ManageFormInputs) =>
       isSubtask
-        ? api.post(`/tasks/${path.split('/')[6]}/subtasks/`, data)
-        : api.post(`/tasks/${path.split('/')[3]}`, data),
+        ? api.put(`/tasks/${path.split('/')[2]}/subtasks/${path.split('/')[5]}`, data)
+        : api.put(`/tasks/${path.split('/')[3]}`, data),
     onError: () => (error: ErrorEvent) => {
       console.log(error)
     },
     onSuccess: () => {
       queryClient.invalidateQueries(isSubtask ? ['subtasks'] : ['tasks'])
       router.push(
-        isSubtask ? `/tasks/${path.split('/')[3]}/subtasks/` : '/tasks',
+        isSubtask ? `/tasks/${path.split('/')[2]}/subtasks/` : '/tasks',
       )
     },
   })
@@ -111,9 +112,8 @@ export function ManageForm() {
       onSubmit={handleSubmit(onSubmit)}
     >
       <header className="flex justify-between items-center w-full max-w-[46rem]">
-        <h2 className="text-secondary-300 font-bold uppercase text-xs">{`${
-          path.endsWith('manage') || path.endsWith('tasks') ? 'New' : 'Edit'
-        } ${path.includes('subtask') ? 'Subtask' : 'Task'}`}</h2>
+        <h2 className="text-secondary-300 font-bold uppercase text-xs">{`${path.endsWith('manage') || path.endsWith('tasks') ? 'New' : 'Edit'
+          } ${path.includes('subtask') ? 'Subtask' : 'Task'}`}</h2>
       </header>
       <section className="flex flex-col gap-4 w-full items-center">
         <Card customHeight>
