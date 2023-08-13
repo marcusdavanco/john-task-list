@@ -43,7 +43,7 @@ export const useSubtasks = <SData = { subtasks: Subtask[] }>(
   })
 }
 
-export const useSubtasksById = <Subtask>(
+export const useSubtaskById = <Subtask>(
   taskId: string,
   id: string,
   options: UseQueryOptions<
