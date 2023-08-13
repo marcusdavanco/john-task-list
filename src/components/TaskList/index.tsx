@@ -78,11 +78,10 @@ export function TaskList({ complete }: TaskListProps) {
             {complete ? 'done' : 'to do'}
           </h2>
           <div className="flex items-center gap-1">
-            <span className="text-secondary-300 text-xs font-bold uppercase">{`${
-              sortMethod === SortOptions.CREATED_AT
+            <span className="text-secondary-300 text-xs font-bold uppercase">{`${sortMethod === SortOptions.CREATED_AT
                 ? ''
                 : sortMethod.replace('_', ' ')
-            }`}</span>
+              }`}</span>
             <button onClick={handleSort}>
               <ArrowUpDown
                 size={16}
