@@ -67,9 +67,9 @@ export function ManageForm() {
     mutationFn: (data: ManageFormInputs) =>
       isSubtask
         ? api.put(
-          `/tasks/${path.split('/')[2]}/subtasks/${path.split('/')[5]}`,
-          data,
-        )
+            `/tasks/${path.split('/')[2]}/subtasks/${path.split('/')[5]}`,
+            data,
+          )
         : api.put(`/tasks/${path.split('/')[3]}`, data),
     onError: () => (error: ErrorEvent) => {
       console.log(error)
@@ -114,15 +114,18 @@ export function ManageForm() {
       onSubmit={handleSubmit(onSubmit)}
     >
       <header className="flex justify-between items-center w-full max-w-[46rem]">
-        <h2 className="text-secondary-300 font-bold uppercase text-xs">{`${path.endsWith('manage') || path.endsWith('tasks') ? 'New' : 'Edit'
-          } ${path.includes('subtask') ? 'Subtask' : 'Task'}`}</h2>
+        <h2 className="text-secondary-300 font-bold uppercase text-xs">{`${
+          path.endsWith('manage') || path.endsWith('tasks') ? 'New' : 'Edit'
+        } ${path.includes('subtask') ? 'Subtask' : 'Task'}`}</h2>
       </header>
       <section className="flex flex-col gap-4 w-full items-center">
         <Card customHeight>
           <div className="flex flex-col gap-4 flex-1 ">
             <label className="flex flex-col gap-1">
               <div>
-                <span className="text-xs uppercase font-bold mb-1 text-white">Due</span>
+                <span className="text-xs uppercase font-bold mb-1 text-white">
+                  Due
+                </span>
                 <span className="text-xs text-gray-700 uppercase mb-1 ml-1">
                   (optional)
                 </span>
