@@ -93,23 +93,13 @@ The architecture of this project has been crafted to deliver a robust and effici
 ## Database Setup
 [comments]: <> (If your application uses a database, explain how to set it up and provide any necessary seed data.)
 
-This application employs a simple SQLite database to manage data persistence. To set up the database for your development environment, follow these steps:
-
-### Database Installation
-SQLite is included in most operating systems by default. If you don't have it installed, you can download it from the [official website](https://www.sqlite.org/download.html).
-
-### Create a Database
-Once SQLite is installed, navigate to your project directory in the terminal and execute the following command to create a new SQLite database file:
-
-```console
-touch dev.db
-```
+This application employs a Postgresql database to manage data persistence. 
 
 ### Configure the Database Path
-In order to connect to the newly created database, you need to specify its path in the '.enc' file. Open the '.env' file located in your project root and add the following line replacing '<path_to_your_project>' with the actual path to your project:
+In order to connect to the a PostgreSQL database, you need to specify its path in the '.env' file. Open the '.env' file located in your project root and add the following line replacing '<url_to_your_project>' with the actual url to your project:
 
 ```env
-DATABASE_URL=file:<path_to_your_project>/dev.db
+DATABASE_URL="postgres://username:password@<url_to_your_project>/database_name"
 ```
 
 ### Migrate Database Schema
