@@ -18,11 +18,11 @@ describe('Subtasks List', () => {
       task: {
         connect: {
           id: 'task-1',
-        }
-      }      
+        },
+      },
     })
 
-    const { subtasks } = await sut.execute({ task_id: 'task-1'})
+    const { subtasks } = await sut.execute({ task_id: 'task-1' })
 
     expect(subtasks).toEqual([
       expect.objectContaining({

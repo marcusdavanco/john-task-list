@@ -19,8 +19,8 @@ describe('Subtasks Delete', () => {
       task: {
         connect: {
           id: 'task-1',
-        }
-      }
+        },
+      },
     })
 
     const deletedTask = await sut.execute({

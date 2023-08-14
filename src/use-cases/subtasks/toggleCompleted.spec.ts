@@ -19,9 +19,9 @@ describe('Subtasks ToogleCompleted', () => {
       task: {
         connect: {
           id: 'task-1',
-        }
-      }
-    })    
+        },
+      },
+    })
 
     const updatedTask1st = await sut.execute({
       id: task.id,
