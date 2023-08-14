@@ -5,7 +5,7 @@ import { expect, it, describe, beforeEach } from 'vitest'
 let tasksRepository: InMemoryTasksRepository
 let sut: RegisterUseCase
 
-describe('Tasks Use-Cases', () => {
+describe('Tasks Register', () => {
   beforeEach(() => {
     tasksRepository = new InMemoryTasksRepository()
     sut = new RegisterUseCase(tasksRepository)

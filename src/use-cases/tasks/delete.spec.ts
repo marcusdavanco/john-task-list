@@ -6,7 +6,7 @@ import { ResourceNotFoundError } from '../errors/resource-not-found-error'
 let tasksRepository: InMemoryTasksRepository
 let sut: DeleteUseCase
 
-describe('Tasks Use-Cases', () => {
+describe('Tasks Delete', () => {
   beforeEach(() => {
     tasksRepository = new InMemoryTasksRepository()
     sut = new DeleteUseCase(tasksRepository)

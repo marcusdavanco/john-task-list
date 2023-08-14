@@ -5,7 +5,7 @@ import { ListUseCase } from './list'
 let tasksRepository: InMemoryTasksRepository
 let sut: ListUseCase
 
-describe('Tasks Use-Cases', () => {
+describe('Tasks List', () => {
   beforeEach(() => {
     tasksRepository = new InMemoryTasksRepository()
     sut = new ListUseCase(tasksRepository)

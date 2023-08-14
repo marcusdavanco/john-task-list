@@ -1,22 +1,27 @@
-import { InMemoryTasksRepository } from '@/repositories/tasks/in-memory/in-memory-repository'
+import { InMemorySubtasksRepository } from '@/repositories/subtasks/in-memory/in-memory-repository'
 import { ToggleCompletedUseCase } from './toggleCompleted'
 import { expect, it, describe, beforeEach } from 'vitest'
 import { ResourceNotFoundError } from '../errors/resource-not-found-error'
 
-let tasksRepository: InMemoryTasksRepository
+let subtasksRepository: InMemorySubtasksRepository
 let sut: ToggleCompletedUseCase
 
-describe('Tasks ToggleCompleted', () => {
+describe('Subtasks ToogleCompleted', () => {
   beforeEach(() => {
-    tasksRepository = new InMemoryTasksRepository()
-    sut = new ToggleCompletedUseCase(tasksRepository)
+    subtasksRepository = new InMemorySubtasksRepository()
+    sut = new ToggleCompletedUseCase(subtasksRepository)
   })
 
   it('should be possible to toogle a task completion status', async () => {
-    const task = await tasksRepository.create({
+    const task = await subtasksRepository.create({
       title: 'New task',
       due_date: new Date('2024-01-01'),
-    })
+      task: {
+        connect: {
+          id: 'task-1',
+        }
+      }
+    })    
 
     const updatedTask1st = await sut.execute({
       id: task.id,
