@@ -133,7 +133,7 @@ export function ManageForm() {
 
               <input
                 type="date"
-                className="bg-white/30 invert text-black rounded-md h-10 p-3"
+                className="bg-white/30 invert text-black rounded-md h-10 p-3 w-full"
                 {...register('due_date')}
               />
             </label>
@@ -150,7 +150,7 @@ export function ManageForm() {
               />
             </label>
             <button
-              className="px-4 py-2 bg-secondary-300 rounded-md font-bold text-sm disabled:opacity-50 disabled:cursor-not-allowed"
+              className="px-4 py-2 bg-secondary-300 rounded-md font-bold text-sm disabled:opacity-50 disabled:cursor-not-allowed text-white"
               disabled={formState.isSubmitting || !formState.isDirty}
               type="submit"
             >
