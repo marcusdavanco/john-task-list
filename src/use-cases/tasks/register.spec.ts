@@ -1,6 +1,5 @@
 import { InMemoryTasksRepository } from '@/repositories/tasks/in-memory/in-memory-repository'
 import { RegisterUseCase } from './register'
-
 import { expect, it, describe, beforeEach } from 'vitest'
 
 let tasksRepository: InMemoryTasksRepository
@@ -19,5 +18,5 @@ describe('Tasks Use-Cases', () => {
     })
 
     expect(task.id).toEqual(expect.any(String))
-  })  
+  })
 })
