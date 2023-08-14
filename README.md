@@ -24,7 +24,7 @@ This application uses Prisma for database management. Run the following command 
 ```console
 npx prisma migrate dev
 ```
-This command will create the required tables and structures within the SQLite database. 
+This command will create the required tables and structures within the database. 
 
 ### Start Development Server
 Once the dependencies are installed and the database schema is migrated, start the development server with the following command:
@@ -108,11 +108,11 @@ This application uses Prisma for database management. Run the following command 
 npx prisma migrate dev
 
 ```
-This application will now be running and connected to your SQLite database.
+This application will now be running and connected to your database.
 
 Remember that this setup is tailored for local development purposes. If you decide to deploy the application, you might need to adjust the dataase configuration accordingly to ensure proper connectivity.
 
-By following these steps, you'll have your SQLite database up and running, ready to store and manage your application's data
+By following these steps, you'll have your database up and running, ready to store and manage your application's data
 ## Testing
 [comments]: <> (If you've included unit tests or integration tests, explain how to run them and what they cover.)
 The quality and reliability of this project is taken seriously, and thorough testing is an integral part of the development process. The testing strategy includes both unit tests for individual components and broader integration tests to ensure the project functions as intended across various scenarios.
