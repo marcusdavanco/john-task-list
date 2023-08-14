@@ -5,6 +5,9 @@ This solution was developed to solve Buzzvel's 2023 Dev Team Test, consisting of
 
 John Task List is a task management application designed for John, a busy professional who struggles to stay organized. It is purposefully user-friendly and visually appealing, allowing him to create, track, and remove tasks.
 
+## View
+[Test the finished project, online](https://john-task-list-3kio6kz0h-marcusdavanco.vercel.app/tasks)
+
 ## Installation
 [comment]: <> (Provide detailed step-by-step instructions on how to install and set up the application. Since you're distributing it using Docker, outline the necessary Docker commands and dependencies)
 
@@ -90,6 +93,7 @@ The architecture of this project has been crafted to deliver a robust and effici
 
 ## API Documentation
 [comments]: <> (If your application includes an API, provide detailed documentation on the available endpoints, request formats, and responses.)
+Todo
 ## Database Setup
 [comments]: <> (If your application uses a database, explain how to set it up and provide any necessary seed data.)
 
@@ -134,8 +138,10 @@ Running this command will trigger the test suite, allowing you to observe the ou
 We are commited to expanding our testing coverage to encompass a wider range of scenarios as the project evolves. This approach will enhance the stability and robustness of the application, ensuring a high-quality user experience.
 ## Deployment
 [comments]: <> (Offer guidance on how to deploy the application in a production environment. Include any necessary configurations or considerations.)
+Todo
 ## Troubleshooting
 [comments]: <> (Create a troubleshooting section that addresses common issues and their solutions. Include a way for users to get help or report bugs.)
+Todo
 ## Contributing
 [comments]: <> (If you intend to allow others to contribute to your project, outline the contribution guidelines and instructions for submitting pull requests.)
 As of August 2023, this project does not support public contribution.
@@ -148,6 +154,8 @@ The Application layout was inspired by [Todo List Mobile App](https://dribbble.c
 
 Special thanks to [Guilherme Vieira](https://github.com/guiprav) for the help with the glassmorphic cards styling and structure.
 
+## Layout
+Access the project layout through this [link](https://www.figma.com/file/3r37l8zuPNNAw6oVch7OLp/ToDo?type=design&node-id=0-1&mode=design&t=zUPS5VdAEqSBP3V3-0). A [Figma](https://www.figma.com/) account is required.
 ## Contact Information
 [comments]: <> (Include your contact information or a link to your portfolio or personal website so that potential employers or collaborators can reach out to you.)
 - [LinkedIn](https://www.linkedin.com/in/marcusdavanco/)
