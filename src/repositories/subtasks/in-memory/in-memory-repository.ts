@@ -10,7 +10,7 @@ export class InMemorySubtasksRepository implements SubtaskRepository {
     return subtask
   }
 
-  async create(data: Prisma.TaskCreateInput) {
+  async create(data: Prisma.SubtaskCreateInput) {
     const subtask = {
       id: 'subtask-1',
       title: data.title,
@@ -31,7 +31,7 @@ export class InMemorySubtasksRepository implements SubtaskRepository {
     return subtasks
   }
 
-  async update(id: string, data: Prisma.TaskCreateInput) {
+  async update(id: string, data: Prisma.SubtaskCreateInput) {
     const subtaskIndex = this.items.findIndex((subtask) => subtask.id === id)
 
     if (subtaskIndex === -1) {
