@@ -17,5 +17,6 @@ RUN npm run build
 EXPOSE 5432
 EXPOSE 3000
 
-CMD npm start
+CMD PORT=3000 npm start
+
 
