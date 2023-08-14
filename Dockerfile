@@ -15,6 +15,7 @@ RUN npx prisma migrate deploy
 RUN npm run build
 
 EXPOSE 5432
+EXPOSE 3000
 
 CMD npm start
 
