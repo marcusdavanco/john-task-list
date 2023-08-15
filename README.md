@@ -6,7 +6,7 @@ This solution was developed to solve Buzzvel's 2023 Dev Team Test, consisting of
 John Task List is a task management application designed for John, a busy professional who struggles to stay organized. It is purposefully user-friendly and visually appealing, allowing him to create, track, and remove tasks.
 
 ## View
-[Test the finished project, online]https://john-task-list-sable.vercel.app/)
+[Test the finished project, online](https://john-task-list-sable.vercel.app/)
 
 ## Installation
 [comment]: <> (Provide detailed step-by-step instructions on how to install and set up the application. Since you're distributing it using Docker, outline the necessary Docker commands and dependencies)
