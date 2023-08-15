@@ -3,7 +3,7 @@ import { ArrowUpDown, SortAscIcon } from 'lucide-react'
 import { useTasks } from '@/hooks/queries/task'
 import { useSubtasks } from '@/hooks/queries/subtask'
 import { Task } from './components/task'
-import { useMemo, useState } from 'react'
+import { useMemo, useRef, useState } from 'react'
 import { usePathname } from 'next/navigation'
 
 enum SortOptions {
@@ -21,6 +21,7 @@ export function TaskList({ complete }: TaskListProps) {
     SortOptions.CREATED_AT,
   )
   const path = usePathname()
+  const sortButtonRef = useRef<HTMLButtonElement>(null)
 
   const handleSort = () => {
     const newSortMethod =
@@ -46,6 +47,8 @@ export function TaskList({ complete }: TaskListProps) {
       }
       return 0
     })
+
+    sortButtonRef.current?.classList.toggle('rotate-180')
   }
 
   const { data: taskData } = useTasks({
@@ -78,14 +81,14 @@ export function TaskList({ complete }: TaskListProps) {
             {complete ? 'done' : 'to do'}
           </h2>
           <div className="flex items-center gap-1">
-            <span className="text-secondary-300 text-xs font-bold uppercase">{`${
-              sortMethod === SortOptions.CREATED_AT
-                ? ''
-                : sortMethod.replace('_', ' ')
-            }`}</span>
+            <span className="text-secondary-300 text-xs font-bold uppercase">{`${sortMethod === SortOptions.CREATED_AT
+              ? ''
+              : sortMethod.replace('_', ' ')
+              }`}</span>
             <button
               onClick={handleSort}
-              className="focus:rotate-180 focus:transition-transform focus:duration-300"
+              ref={sortButtonRef}
+              className="transition-transform duration-300"
             >
               <ArrowUpDown
                 size={16}
