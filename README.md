@@ -54,8 +54,6 @@ Once the tasks are displayed, you can click on the checkbox to mark a task as co
 ### Sorting tasks
 
 You can switch on the sorting by clicking on the arrows on the header of the task list, please consider that once activated, for now, to deactivated it you'll need to reload the page. 
-
-Edit: The sorting stopped working when the database was replaced from sqlite to postgres, there's an issue for fixing it.
 ### The toggle complete behavior
 
 - Marking a task complete won't change the subtasks completion status, as that was considered a business rule that was not explicit in the dev-test description.

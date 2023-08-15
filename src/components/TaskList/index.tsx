@@ -83,7 +83,10 @@ export function TaskList({ complete }: TaskListProps) {
                 ? ''
                 : sortMethod.replace('_', ' ')
             }`}</span>
-            <button onClick={handleSort}>
+            <button
+              onClick={handleSort}
+              className="focus:rotate-180 focus:transition-transform focus:duration-300"
+            >
               <ArrowUpDown
                 size={16}
                 className="text-secondary-300 cursor-pointer"
