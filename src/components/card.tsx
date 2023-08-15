@@ -37,7 +37,12 @@ export function Card({
           !opaque
             ? 'from-white/[0.05] to-white[0.02]'
             : 'from-white/[0.18] to-white/[0.08]'
-        } shadow-sm p-6`}
+        } shadow-lg p-6`}
+        style={{
+          background: opaque
+            ? 'linear-gradient(179deg, rgba(255, 255, 255, 0.25) 0%, transparent 85%)'
+            : 'linear-gradient(179deg, rgba(255, 255, 255, 0.05) 0%, transparent 75%)',
+        }}
       >
         {children}
       </div>
