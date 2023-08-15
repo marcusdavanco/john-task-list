@@ -74,7 +74,7 @@ export function TaskList({ complete }: TaskListProps) {
     <article className="flex flex-col items-center w-full lg:max-w-[46rem] gap-7 mb-7">
       {cardsToDisplay.length > 0 && (
         <header className="flex justify-between items-center w-full max-w-[46rem]">
-          <h2 className="text-secondary-300 font-bold uppercase text-xs">
+          <h2 className="text-secondary-300 font-bold uppercase text-xs animate-fade">
             {complete ? 'done' : 'to do'}
           </h2>
           <div className="flex items-center gap-1">

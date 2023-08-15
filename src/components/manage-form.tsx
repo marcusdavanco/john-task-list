@@ -114,7 +114,7 @@ export function ManageForm() {
       onSubmit={handleSubmit(onSubmit)}
     >
       <header className="flex justify-between items-center w-full max-w-[46rem]">
-        <h2 className="text-secondary-300 font-bold uppercase text-xs">{`${
+        <h2 className="text-secondary-300 font-bold uppercase text-xs animate-fade">{`${
           path.endsWith('manage') || path.endsWith('tasks') ? 'New' : 'Edit'
         } ${path.includes('subtask') ? 'Subtask' : 'Task'}`}</h2>
       </header>
