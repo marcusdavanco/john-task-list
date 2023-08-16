@@ -31,11 +31,13 @@ export function Card({
         }}
       />
       <div
-        className={`flex items-center w-full ${customHeight ? 'h-fit' : 'h-[90px]'
-          } rounded-lg bg-gradient-to-bl ${!opaque
+        className={`flex items-center w-full ${
+          customHeight ? 'h-fit' : 'h-[90px]'
+        } rounded-lg bg-gradient-to-bl ${
+          !opaque
             ? 'from-white/[0.05] to-white[0.02]'
             : 'from-white/[0.18] to-white/[0.08]'
-          } shadow-lg p-6`}
+        } shadow-lg p-6`}
       >
         {children}
       </div>
